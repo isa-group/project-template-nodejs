@@ -7,25 +7,25 @@ integration too.
 
 ## How to adapt the template
 
-Before starting to develop your project you must adapt this template, follow the next 
-steps.
+Before starting to develop your project you must adapt this template by following the next 
+steps:
 
-0. Download [latest version](#latest-release)
+0. Download project-template-nodejs [latest version](#latest-release).
 1. [Adapt](#1-adapt-the-package) the `package.json`.
 2. [Modify](#2-modify-gruntfile) `Grunfile.js` and select the tasks.   
-  2.1. Defined Tasks.  
+  2.1. Defined Tasks.
   2.2. Select and configure tasks.
 3. [Clear](#3-clear-changelog) CHANGELOG.md.
 4. [Remove](#4-remove-git-directory) `.git` directory.
 5. [Edit](#5-edit-the-readme) the `README.md`.
 6. [CI](#6-ci-with-travis-ci) with Travis CI.
 7. [Developing](#7-developing-your-project) your project.  
-  7.1. Using [dates](#using-dates)  
-  7.2. Project's [configurations](#projects-configurations-variables) variables   
-  7.3. [Logging](#logging)  
-  7.4. [Promise](#promise)  
-  7.5. [YAML and JSON](#yaml-and-json)  
-  7.6. [Http requests](#http-requests)
+  7.1. Using [dates](#using-dates).  
+  7.2. Project's [configurations](#projects-configurations-variables) variables.  
+  7.3. [Logging](#logging).  
+  7.4. [Promise](#promise).  
+  7.5. [YAML and JSON](#yaml-and-json).  
+  7.6. [Http requests](#http-requests).
 
 ## 1. Adapt the package
 
@@ -77,7 +77,7 @@ You MUST change the following fields:
 ## 2. Modify Gruntfile
 
 After adapting `package.json`, you must select and configure Grunt tasks. It is recommended 
-to use all of the defined tasks, but now it is presented all of them and its using obligation.
+to use all of the defined tasks, but now it is presented all of them and its use obligation.
 
 ### 2.1 Defined Tasks
 
@@ -85,7 +85,7 @@ to use all of the defined tasks, but now it is presented all of them and its usi
 
 > You **MUST** use this task.
 
-This task checks whether your code follows correctly the javascript syntax. You don't be able 
+This task checks whether your code follows correctly the javascript syntax. You are not able 
 either to change what file are checked or to change `.jshintrc` file.
 
 #### grunt-contrib-watch
@@ -218,7 +218,7 @@ variables on command line.
 
 ### 2.1 Select and Configure tasks
 
-For excecuting default tasks run:
+For executing default tasks run:
 
 ```
 grunt 
