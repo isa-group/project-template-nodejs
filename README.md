@@ -1,8 +1,8 @@
 # Project Template Node JS
 
 This repository contains a template for a [Node JS](https://nodejs.org/en/) project with some development policy and 
-tasks automation with [Grunt](http://gruntjs.com/).  Also, this project contains some node modules if you need to 
-manage: date, logging, configuration, requests, yaml, json and promise. Finally, it has [Travis CI](https://travis-ci.org/) 
+tasks automation with [Grunt](http://gruntjs.com/).  Also, this project contains some NPM modules that you have 
+to use for managing: date,  logging, configuration, requests, yaml, json and promise. Finally, it has [Travis CI](https://travis-ci.org/) 
 integration too.
 
 ## How to adapt the template
@@ -277,6 +277,9 @@ regularly. This guide explains how and why GitHub Flow works.
 > We have only modified one point of this flow, the name of your branch has to be the number of
 > the issue that is being resolved. If your issue has the number **4** then your branch has to be
 > named **#4**.
+
+Tests are very important in software development, moreover, if GitHub Flow is used, test is even
+more important.
 
 Depending on you want to do, you have to use a specific npm modules in order to be standard. All
 modules are being installed in the project before. 
