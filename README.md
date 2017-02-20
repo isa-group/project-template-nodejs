@@ -10,22 +10,22 @@ integration too.
 Before starting to develop your project you must adapt this template by following the next 
 steps:
 
-0. Download project-template-nodejs [latest version](#latest-release).
-1. [Adapt](#1-adapt-the-package) the `package.json`.
-2. [Modify](#2-modify-gruntfile) `Grunfile.js` and select the tasks.   
-  2.1. Defined Tasks.
-  2.2. Select and configure tasks.
-3. [Clear](#3-clear-changelog) CHANGELOG.md.
-4. [Remove](#4-remove-git-directory) `.git` directory.
-5. [Edit](#5-edit-the-readme) the `README.md`.
-6. [CI](#6-ci-with-travis-ci) with Travis CI.
-7. [Developing](#7-developing-your-project) your project.  
-  7.1. Using [dates](#using-dates).  
-  7.2. Project's [configurations](#projects-configurations-variables) variables.  
-  7.3. [Logging](#logging).  
-  7.4. [Promise](#promise).  
-  7.5. [YAML and JSON](#yaml-and-json).  
-  7.6. [Http requests](#http-requests).
+1. Download project-template-nodejs [latest version](#latest-release).
+2. [Adapt](#1-adapt-the-package) the `package.json`.
+3. [Modify](#2-modify-gruntfile) `Grunfile.js` and select the tasks.   
+  3.1. Defined Tasks.
+  3.2. Select and configure tasks.
+4. [Clear](#3-clear-changelog) CHANGELOG.md.
+5. [Remove](#4-remove-git-directory) `.git` directory.
+6. [Edit](#5-edit-the-readme) the `README.md`.
+7. [CI](#6-ci-with-travis-ci) with Travis CI.
+8. [Developing](#7-developing-your-project) your project.  
+  8.1. Using [dates](#using-dates).  
+  8.2. Project's [configurations](#projects-configurations-variables) variables.  
+  8.3. [Logging](#logging).  
+  8.4. [Promise](#promise).  
+  8.5. [YAML and JSON](#yaml-and-json).  
+  8.6. [Http requests](#http-requests).
 
 ## 1. Adapt the package
 
