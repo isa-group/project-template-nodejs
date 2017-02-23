@@ -92,7 +92,7 @@ either to change what file are checked or to change `.jshintrc` file.
 
 > You **SHOULD** use this task.
 
-This task excecutes other tasks while you are developing, the jshint task for example. 
+This task executes other tasks while you are developing, the jshint task for example. 
 You can choose what task are executed if you change something at `Grunfile.js` as following:
 
 ```js
@@ -110,7 +110,7 @@ Add to `tasks` field all of the tasks that you want to run it.
 
 > You **MUST** use this task.
 
-**All your code has to be tested**. This task executes tests. In addition this task will be used
+**All your code has to be tested**. This task executes tests. In addition, this task will be used
 by Travis CI to check whether your changes pass the tests and can be merged. You don't be able
 to configure this task. 
 
@@ -132,7 +132,7 @@ For use this task you have to set two ENVIRONMENT variables in the shell:
   - windows: `set GITHUB_USERNAME=<your-github-username>`
   - linux: `export GITHUB_USERNAME=<your-github-username>`
 
-If you project is a `node-application`, a server application, an API, or anything that can 
+If your project is a `node-application`, a server application, an API, or anything that can 
 be deployed, you must configure this task as following:
 
 ```js
@@ -153,7 +153,7 @@ release: {
 }
 ```
 
-If you project is a `npm module` you must configure this task as following:
+If your project is a `npm module` you must configure this task as following:
 
 ```js
 release: {
@@ -182,8 +182,8 @@ be able to change the configuration of this task.
 
 #### grunt-dockerize 
 
-> If you need to build docker images, you **MUST** use this task. In addition this task will be 
-used by Travis CI for continuos building. You must configure this task as following:
+> If you need to build docker images, you **MUST** use this task. In addition, this task will be 
+used by Travis CI for continuous building. You must configure this task as following:
 
 ```js
 dockerize: {
@@ -224,7 +224,7 @@ For executing default tasks run:
 grunt 
 ```
 
-If you want execute tests task run:
+If you want to execute tests task run:
 
 ```
 grunt test
@@ -269,10 +269,10 @@ If your new project is public you must integrate Travis CI on project setting.
 
 ## 7. Developing your project
 
-In order to be aline with the Github filosofy, you must use 
+In order to be lined up to Github philosophy, you must use 
 [Github Flow](https://guides.github.com/introduction/flow/) that is a lightweight, 
-branch-based workflow that supports teams and projects where deployments are made 
-regularly. This guide explains how and why GitHub Flow works.
+branch-based workflow that supports teams and projects where deployments are regularly
+made. This guide explains how and why GitHub Flow works.
 
 > We have only modified one point of this flow, the name of your branch has to be the number of
 > the issue that is being resolved. If your issue has the number **4** then your branch has to be
