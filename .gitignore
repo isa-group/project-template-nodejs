@@ -63,3 +63,6 @@ dist/
 githubCredential.json
 .version
 .vscode/
+
+#Netbeans project folder
+nbproject/

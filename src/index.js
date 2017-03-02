@@ -28,6 +28,15 @@ var moment = require('moment');
 var Promise = require('bluebird');
 
 /*
+ * If you are going to use express, please include helmet library 
+ * in order to increase security in your webapp
+ */
+//var express = require('express');
+//var helmet = require('helmet');
+//var app = express();
+//app.use(helmet());
+
+/*
  * Export functions and Objects
  */
 module.exports = {
@@ -57,7 +66,7 @@ function _myPromiseFunction(param1, param2) {
         if (param1 && param2) {
             resolve(param1 + "-" + param2);
         } else {
-            reject(new Error("Params are require"));
+            reject(new Error("Params are required"));
         }
     });
 
