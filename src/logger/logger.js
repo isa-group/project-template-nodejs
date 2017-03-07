@@ -20,44 +20,59 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
 'use strict';
 
-
 /**
  * Module dependecies.
  * */
 
-var jsyaml = require('js-yaml');
-var fs = require('fs');
-var path = require('path');
+var winston = require('winston');
+var config = require('../configurations/config');
+
+/**
+ * Configure here your custom levels.
+ * */
+var customLeves = {
+    levels: {
+        error: 7,
+        warning: 8,
+        custom: 9,
+        info: 12,
+        debug: 13
+    },
+    colors: {
+        error: 'red',
+        warning: 'yellow',
+        custom: 'magenta',
+        info: 'white',
+        debug: 'black'
+    }
+};
+
+winston.emitErrs = true;
+
+var logger = new winston.Logger({
+    levels: customLeves.levels,
+    colors: customLeves.colors,
+    transports: [
+        new winston.transports.File({
+            level: config.loglevel,
+            filename: config.logfile,
+            handleExceptions: true,
+            json: false,
+            maxsize: 5242880, //5MB
+            colorize: false
+        }),
+        new winston.transports.Console({
+            level: config.loglevel,
+            handleExceptions: true,
+            json: false,
+            colorize: true,
+            timestamp: true
+        })
+    ],
+    exitOnError: false
+});
 
 /*
  * Export functions and Objects
  */
-var config = {
-    addConfiguration: _addConfiguration
-};
-
-module.exports = config;
-
-/*
- * Implement the functions
- */
-function _addConfiguration(uri, encoding) {
-    var configString = null;
-
-    if (!uri) {
-        throw new Error("Parameter URI is required");
-    } else {
-        configString = fs.readFileSync(path.join(__dirname, uri), encoding);
-    }
-
-    var newConfigurations = jsyaml.safeLoad(configString)[process.env.NODE_ENV ? process.env.NODE_ENV : 'development'];
-
-    for (var c in newConfigurations) {
-        this[c] = newConfigurations[c];
-    }
-}
-
-/*
- * Setup default config location
- */
-config.addConfiguration('config.yaml', 'utf8');
+module.exports = logger;
