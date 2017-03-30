@@ -7,12 +7,17 @@
   "main": "index.js",
   "dependencies": {
     "bluebird": "^3.4.7",
+    "body-parser": "^1.17.1",
+    "cors": "^2.8.3",
+    "express": "^4.15.2",
+    "helmet": "^3.5.0",
     "js-yaml": "^3.8.1",
     "moment": "^2.17.1",
     "request": "^2.79.0",
     "winston": "^2.3.1"
   },
   "devDependencies": {
+    "bower": "^1.8.0",
     "chai": "^3.5.0",
     "grunt": "^1.0.1",
     "grunt-banner": "^0.6.0",
@@ -25,7 +30,8 @@
     "mocha": "^3.2.0"
   },
   "scripts": {
-    "start": "npm index",
+    "start": "node index.js",
+    "postinstall": "bower install",
     "test": "grunt test"
   },
   "keywords": [
