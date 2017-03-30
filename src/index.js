@@ -23,18 +23,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 /*
  * Put here your dependecies
  */
-var logger = require('./logger/logger');
-var moment = require('moment');
-var Promise = require('bluebird');
+var express = require('express'),
+    helmet = require('helmet'),
+    logger = require('./logger/logger'),
+    moment = require('moment'),
+    Promise = require('bluebird'),
+    config = require('./configurations/config');
 
 /*
  * If you are going to use express, please include helmet library 
  * in order to increase security in your webapp
  */
-//var express = require('express');
-//var helmet = require('helmet');
-//var app = express();
-//app.use(helmet());
+
+var port = process.env.PORT || config.server.port;
+var app = express();
+app.use(helmet());
+app.use('/', express.static(__dirname + '/../public'));
+app.listen(port);
+
 
 /*
  * Export functions and Objects
