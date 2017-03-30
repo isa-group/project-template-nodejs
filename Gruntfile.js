@@ -1,5 +1,5 @@
 /*!
-project-template-nodejs 0.0.0, built on: 2017-02-10
+project-template-nodejs 0.0.0, built on: 2017-03-30
 Copyright (C) 2017 ISA group
 http://www.isa.us.es/
 https://github.com/isa-group/project-template-nodejs
@@ -72,7 +72,7 @@ module.exports = function (grunt) {
 
         //Lint JS 
         jshint: {
-            all: ['Gruntfile.js', 'src/**/*.js', 'tests/**/*.js'], //If you want to inspect more file, you change this.
+            all: ['Gruntfile.js', 'src/**/*.js', 'tests/**/*.js', 'index.js'], //If you want to inspect more file, you change this.
             options: {
                 jshintrc: '.jshintrc'
             }
@@ -152,6 +152,11 @@ module.exports = function (grunt) {
         }
     });
 
+    grunt.registerTask('buildOn', function () {
+        grunt.config('pkg.buildOn', grunt.template.today("yyyy-mm-dd"));
+        grunt.file.write('package.json', JSON.stringify(grunt.config('pkg'), null, 2));
+    });
+
     // Default task(s).
     grunt.registerTask('default', ['jshint', 'usebanner']);
 
@@ -159,7 +164,7 @@ module.exports = function (grunt) {
     grunt.registerTask('test', ['jshint', 'mochaTest']);
 
     //BUILD TASK
-    grunt.registerTask('build', ['test', 'usebanner', 'dockerize']);
+    grunt.registerTask('build', ['test', 'buildOn', 'usebanner', 'dockerize']);
 
     //DEVELOPMENT TASK
     grunt.registerTask('dev', ['watch']);
