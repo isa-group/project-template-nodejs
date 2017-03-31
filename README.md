@@ -12,22 +12,24 @@ steps:
 
 1. Download project-template-nodejs [latest version](#latest-release).
 2. [Adapt](#1-adapt-the-package) the `package.json`.
-3. [Modify](#2-modify-gruntfile) `Grunfile.js` and select the tasks.   
-  3.1. Defined Tasks.
-  3.2. Select and configure tasks.
-4. [Clear](#3-clear-changelog) CHANGELOG.md.
-5. [Remove](#4-remove-git-directory) `.git` directory.
-6. [Edit](#5-edit-the-readme) the `README.md`.
-7. [CI](#6-ci-with-travis-ci) with Travis CI.
-8. [Developing](#7-developing-your-project) your project.  
-  8.1. Using [dates](#using-dates).  
-  8.2. Project's [configurations](#projects-configurations-variables) variables.  
-  8.3. [Logging](#logging).  
-  8.4. [Promise](#promise).  
-  8.5. [YAML and JSON](#yaml-and-json).  
-  8.6. [Http requests](#http-requests).
+3. [Adapt](#2-adapt-the-bower) the `bower.json`.
+4. [Modify](#3-modify-gruntfile) `Grunfile.js` and select the tasks.   
+  4.1. Defined Tasks.  
+  4.2. Select and configure tasks.
+5. [Clear](#3-clear-changelog) CHANGELOG.md.
+6. [Remove](#4-remove-git-directory) `.git` directory.
+7. [Edit](#5-edit-the-readme) the `README.md`.
+8. [CI](#6-ci-with-travis-ci) with Travis CI.
+9. [Developing](#7-developing-your-project) your project.  
+  9.1. Using [dates](#using-dates).  
+  9.2. Project's [configurations](#projects-configurations-variables) variables.  
+  9.3. [Logging](#logging).  
+  9.4. [Promise](#promise).  
+  9.5. [YAML and JSON](#yaml-and-json).  
+  9.6. [HTTP requests](#http-requests).  
+  9.7. [Make a server](#make-a-server).
 
-## 1. Adapt the package
+## 2. Adapt the package
 
 First, you must adapt the `package.json` file and modify some values for defining your project.
 A `package.json` is generally seemed such as the following.
@@ -74,12 +76,53 @@ You MUST change the following fields:
 - **[ MUST ]** `repository.web` = Web view of your repository, Github for example.
 - **[ MUST ]** `docker.url` = If you use docker for delivering and running your app.
 
-## 2. Modify Gruntfile
+## 3. Adapt the bower
+
+Secondly, you must adapt the `bower.json` file and modify some values for defining your front-end dependencies. A `bower.json` is generally seemed such as the following.
+
+```js
+{
+  "name": "project-template-nodejs",
+  "description": "Project Template for Node JS developments",
+  "main": "index.js",
+  "authors": [{
+    "name": "ISA group",
+    "web": "http://www.isa.us.es/"
+  }],
+  "license": "GPL-3.0+",
+  "keywords": [
+    "template",
+    "nodejs",
+    "node",
+    "project"
+  ],
+  "homepage": "https://github.com/isa-group/project-template-nodejs",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components/",
+    "test",
+    "tests"
+  ]
+}
+```
+
+You MUST change the following fields:
+
+- **[ MUST ]** `name` = Name of your project. 
+- **[ COULD ]** `description` = A breaf description of your proyect.
+- **[ MUST ]** `homepage` = Web or Github's homepage of your project.
+- **[ SHOULD ]** `keywords` = Key words for idenfiying your project.
+- **[ MUST ]** `author.name`= Your name or your organization name.
+- **[ MUST ]** `author.web` = Author web site.
+
+## 4. Modify Gruntfile
 
 After adapting `package.json`, you must select and configure Grunt tasks. It is recommended 
 to use all of the defined tasks, but now it is presented all of them and its use obligation.
 
-### 2.1 Defined Tasks
+### 4.1 Defined Tasks
 
 #### grunt-contrib-jshint 
 
@@ -216,7 +259,7 @@ dockerize: {
 You must change `..options.name` to the name of your project and set up these environment
 variables on command line. 
 
-### 2.1 Select and Configure tasks
+### 4.1 Select and Configure tasks
 
 For executing default tasks run:
 
@@ -247,11 +290,11 @@ And you always execute this while you are developing:
 ```
 grunt dev
 ```
-## 3. Clear CHANGELOG
+## 5. Clear CHANGELOG
 
 Remove all line on `CHANGELOG.md`.
 
-## 4. Remove git directory
+## 6. Remove git directory
 
 If it exists then remove `.git` and initialize the repository for the new project.
 
@@ -259,15 +302,15 @@ If it exists then remove `.git` and initialize the repository for the new projec
 git init
 ```
 
-## 5. Edit the README
+## 7. Edit the README
 
 Clean the `README.md` and remove all lines except `## Latest release` and following.
 
-## 6. CI with Travis CI
+## 8. CI with Travis CI
 
 If your new project is public you must integrate Travis CI on project setting. 
 
-## 7. Developing your project
+## 9. Developing your project
 
 In order to be lined up to Github philosophy, you must use 
 [Github Flow](https://guides.github.com/introduction/flow/) that is a lightweight, 
@@ -304,8 +347,6 @@ Sometimes, you could need to add external configuration, exposing `port` or the
 
 ```js
 var config = require('./config');
-
-config.addConfiguration('.src/configurations/myOwnConfig.yaml');
 
 app.listen(config.port);
 
@@ -411,10 +452,51 @@ var jsyaml = require('js-yaml');
 var yamlString = fs.readFileSync(uri, encoding);
 var jsObject = jsyaml.safeLoad(configString);
 ```
-### Http requests
+### HTTP requests
 
 If you have to do http requests, you must use 
 [requests](https://github.com/request/request) library.
+
+### Make a server
+
+If you want to serve your static files or create a REST API, you must use [ExpressJS](http://expressjs.com/es/). 
+
+```js
+var express = require('express');
+
+var app = express();
+
+//serving static files
+app.use('/', express.static('../public'));
+
+//adding API endpoint
+app.get('api/v1/resources', function(req, res, next){});
+```
+In adition, if you need: 
+
+- To use cors, you should use npm `cors` module.
+
+```js
+var cors = require('cors');
+
+app.use(cors(options));
+```
+
+- To make your API secure, you should use npm `helmet` module. 
+
+```js
+var helmet = require('helmet');
+
+app.use(helmet(options));
+```
+
+- To use json data exchanging, you should use npm `body-parser` module.
+
+```js
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+```
 
 ## Latest release
 
