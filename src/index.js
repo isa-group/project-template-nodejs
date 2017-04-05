@@ -20,6 +20,36 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
 'use strict';
 
+/**
+ * @SwaggerHeader
+ * info:
+ *   title: Swagger Sample App
+ *   description: This is a sample server Petstore server.
+ *   termsOfService: http://swagger.io/terms/
+ *   contact:
+ *     name: ISA GROUP
+ *     url: http://www.isa.us.es/
+ *     email: support@swagger.io
+ *   license:
+ *     name: Apache 2.0
+ *     url: http://www.apache.org/licenses/LICENSE-2.0.html
+ *   version: 1.0.1
+ * host: localhost:5000
+ * basePath: /api/v1
+ * consumes:
+ *   - application/json
+ * produces:
+ *   - application/json
+ * tags:
+ *   - name: pet
+ *     description: Everything about your Pets
+ *     externalDocs:
+ *       description: Find out more
+ *       url: http://swagger.io
+ *   - name: other tag
+*/
+
+
 /*
  * Put here your dependecies
  */
@@ -28,10 +58,11 @@ var express = require('express'),
     logger = require('./logger/logger'),
     moment = require('moment'),
     Promise = require('bluebird'),
+    swaggerTools = require('swagger-tools'),
     config = require('./configurations/config');
 
 /*
- * If you are going to use express, please include helmet library 
+ * If you are going to use express, please include helmet library
  * in order to increase security in your webapp
  */
 
@@ -39,6 +70,57 @@ var port = process.env.PORT || config.server.port;
 var app = express();
 app.use(helmet());
 app.use('/', express.static(__dirname + '/../public'));
+var swaggerDoc = require('./swagger.json');
+
+
+
+swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
+  // Interpret Swagger resources and attach metadata to request - must be first in swagger-tools middleware chain
+  app.use(middleware.swaggerMetadata());
+
+  // Validate Swagger requests
+  app.use(middleware.swaggerValidator());
+
+  // Route validated requests to appropriate controller
+  app.use(middleware.swaggerRouter());
+
+  // Serve the Swagger documents and Swagger UI
+  app.use(middleware.swaggerUi());
+
+})
+
+
+/**
+ * @SwaggerPath
+ *   /pets:
+ *     get:
+ *       summary: just a test route
+ *       description: nothing to see here
+ *       tags:
+ *         - pet
+ *       consumes:
+ *         - application/json
+ *       produces:
+ *         - application/json
+ *       responses:
+ *         200:
+ *           description: successful operation
+ *           schema:
+ *             $ref: "#/definitions/ApiResponse"
+ */
+
+
+app.get('/api/v1/pets',function(req,res){
+    res.json([{
+      pet : "dog"
+    },
+    {
+      pet:"cat"
+    }]);
+
+})
+
+
 app.listen(port);
 
 
@@ -77,3 +159,17 @@ function _myPromiseFunction(param1, param2) {
     });
 
 }
+
+/**
+ * @SwaggerDefinitions
+ *   ApiResponse:
+ *     type: object
+ *     properties:
+ *       code:
+ *         type: integer
+ *         format: int32
+ *       type:
+ *         type: string
+ *       message:
+ *         type: string
+ */

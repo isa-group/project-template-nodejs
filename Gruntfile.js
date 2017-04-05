@@ -34,6 +34,8 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-dockerize');
 
+    grunt.loadNpmTasks('grunt-swagger-docs');
+
     // Project configuration.
     grunt.initConfig({
         //Load configurations
@@ -70,7 +72,7 @@ module.exports = function (grunt) {
             }
         },
 
-        //Lint JS 
+        //Lint JS
         jshint: {
             all: ['Gruntfile.js', 'src/**/*.js', 'tests/**/*.js', 'index.js'], //If you want to inspect more file, you change this.
             options: {
@@ -101,7 +103,7 @@ module.exports = function (grunt) {
                 changelog: true, //NOT CHANGE
                 changelogFromGithub: true, //NOT CHANGE
                 githubReleaseBody: 'See [CHANGELOG.md](./CHANGELOG.md) for details.', //NOT CHANGE
-                npm: false, //CHANGE TO TRUE IF YOUR PROJECT IS A NPM MODULE 
+                npm: false, //CHANGE TO TRUE IF YOUR PROJECT IS A NPM MODULE
                 //npmtag: true, //default: no tag
                 beforeBump: [], // IS NOT READY YET
                 afterBump: [], // IS NOT READY YET
@@ -149,7 +151,14 @@ module.exports = function (grunt) {
                     push: true
                 }
             }
-        }
+        },
+        'swagger-docs': {
+              dev:{
+                  src: ['src/**/*.js'],
+                  dest: 'src/swagger.json',
+              }
+          }
+
     });
 
     grunt.registerTask('buildOn', function () {
@@ -165,6 +174,9 @@ module.exports = function (grunt) {
 
     //BUILD TASK
     grunt.registerTask('build', ['test', 'buildOn', 'usebanner', 'dockerize']);
+
+    //BUILD SWAGGER DOCS
+    grunt.registerTask('swagger', ['swagger-docs']);
 
     //DEVELOPMENT TASK
     grunt.registerTask('dev', ['watch']);
