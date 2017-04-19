@@ -1,3 +1,6 @@
+All including documentation and code are copyrighted and the copyright is owned by [ISA Group](http://www.isa.us.es), [University of Sevilla](http://www.us.es) , unauthorized reproduction or distribution of this copyrighted work is illegal.
+For commercial licensing terms, please [contact](./extra/contact) for any inquiry.
+
 The version <%= pkg.version %> is the latest stable version of <%= pkg.name %> component.
 see [release note](<%= pkg.repository.github %>/releases/tag/<%= pkg.version %>) for details.
 
