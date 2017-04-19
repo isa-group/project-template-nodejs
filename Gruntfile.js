@@ -60,8 +60,8 @@ module.exports = function (grunt) {
             readme: {
                 options: {
                     position: 'bottom',
-                    banner: '## Latest release\n\n<%= latestReleaseNotes %>',
-                    replace: /##\sLatest\srelease(\s||.)+/g,
+                    banner: '## Copyright notice\n\n<%= latestReleaseNotes %>',
+                    replace: /##\sCopyright\snotice(\s||.)+/g,
                     linebreak: false
                 },
                 files: {
