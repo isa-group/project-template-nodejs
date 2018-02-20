@@ -312,8 +312,9 @@ If your new project is public you must integrate Continuous Integration with Tra
 
 1. Sign in to https://travis-ci.org/ using your GitHub account.
 2. In your profile page, enable the repository of your project.
-3. Update .travis.yml file if needed
+3. Update .travis.yml file if needed.
 
+Now if you go to https://travis-ci.org/{username}/{repositoryName}, you will be able to see the logs made by travis.
 
 ## 9. Developing your project
 
