@@ -305,7 +305,7 @@ dockerize: {
 
 > You **MUST** use this task.
 
-This task generate coverage report of istanbul instrumented code.
+This task generates coverage report of istanbul instrumented code.
 
 ```js
 mocha_istanbul: {
