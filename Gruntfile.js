@@ -115,91 +115,9 @@ module.exports = function(grunt) {
         },
 
         src: [
-          "tests/01-pre-test/**/*.test.js",
-          "tests/02-test-cases/**/*.test.js",
-          "tests/03-post-test/**/*.test.js"
+          "tests/**/*.test.js",
         ]
       },
-
-      database: {
-        options: {
-          reporter: "spec",
-
-          //captureFile: 'test.results<%= grunt.template.today("yyyy-mm-dd:HH:mm:ss") %>.txt', // Optionally capture the reporter output to a file
-
-          quiet: false, // Optionally suppress output to standard out (defaults to false)
-
-          clearRequireCache: false, // Optionally clear the require cache before running tests (defaults to false)
-
-          noFail: false // Optionally set to not fail on failed tests (will still fail on other errors)
-        },
-
-        src: [
-          "tests/01-pre-test/**/*.test.js",
-          "tests/02-test-cases/01-database/*.test.js",
-          "tests/03-post-test/**/*.test.js"
-        ]
-      },
-
-      unit: {
-        options: {
-          reporter: "spec",
-
-          //captureFile: 'test.results<%= grunt.template.today("yyyy-mm-dd:HH:mm:ss") %>.txt', // Optionally capture the reporter output to a file
-
-          quiet: false, // Optionally suppress output to standard out (defaults to false)
-
-          clearRequireCache: false, // Optionally clear the require cache before running tests (defaults to false)
-
-          noFail: false // Optionally set to not fail on failed tests (will still fail on other errors)
-        },
-
-        src: [
-          "tests/01-pre-test/**/*.test.js",
-          "tests/02-test-cases/02-unit/**/*.test.js",
-          "tests/03-post-test/**/*.test.js"
-        ]
-      },
-
-      controllers: {
-        options: {
-          reporter: "spec",
-
-          //captureFile: 'test.results<%= grunt.template.today("yyyy-mm-dd:HH:mm:ss") %>.txt', // Optionally capture the reporter output to a file
-
-          quiet: false, // Optionally suppress output to standard out (defaults to false)
-
-          clearRequireCache: false, // Optionally clear the require cache before running tests (defaults to false)
-
-          noFail: false // Optionally set to not fail on failed tests (will still fail on other errors)
-        },
-
-        src: [
-          "tests/01-pre-test/**/*.test.js",
-          "tests/02-test-cases/03-controllers/**/*.test.js",
-          "tests/03-post-test/**/*.test.js"
-        ]
-      },
-
-      integral: {
-        options: {
-          reporter: "spec",
-
-          //captureFile: 'test.results<%= grunt.template.today("yyyy-mm-dd:HH:mm:ss") %>.txt', // Optionally capture the reporter output to a file
-
-          quiet: false, // Optionally suppress output to standard out (defaults to false)
-
-          clearRequireCache: false, // Optionally clear the require cache before running tests (defaults to false)
-
-          noFail: false // Optionally set to not fail on failed tests (will still fail on other errors)
-        },
-
-        src: [
-          "tests/01-pre-test/**/*.test.js",
-          "tests/02-test-cases/04-integral/**/*.test.js",
-          "tests/03-post-test/**/*.test.js"
-        ]
-      }
     },
 
     //Make a new release on github
@@ -288,9 +206,7 @@ module.exports = function(grunt) {
     mocha_istanbul: {
       full: {
         src: [
-          "tests/01-pre-test/**/*.test.js",
-          "tests/02-test-cases/**/*.test.js",
-          "tests/03-post-test/**/*.test.js"
+          "tests/**/*.test.js",
         ],
 
         options: {
@@ -301,70 +217,6 @@ module.exports = function(grunt) {
           coverageFolder: "public/coverage"
         }
       },
-
-      database: {
-        src: [
-          "tests/01-pre-test/**/*.test.js",
-          "tests/02-test-cases/01-database/*.test.js",
-          "tests/03-post-test/**/*.test.js"
-        ],
-
-        options: {
-          mask: "*.test.js",
-
-          istanbulOptions: ["--harmony", "--handle-sigint"],
-
-          coverageFolder: "public/coverage"
-        }
-      },
-
-      unit: {
-        src: [
-          "tests/01-pre-test/**/*.test.js",
-          "tests/02-test-cases/02-unit/**/*.test.js",
-          "tests/03-post-test/**/*.test.js"
-        ],
-
-        options: {
-          mask: "*.test.js",
-
-          istanbulOptions: ["--harmony", "--handle-sigint"],
-
-          coverageFolder: "public/coverage"
-        }
-      },
-
-      controllers: {
-        src: [
-          "tests/01-pre-test/**/*.test.js",
-          "tests/02-test-cases/03-controllers/**/*.test.js",
-          "tests/03-post-test/**/*.test.js"
-        ],
-
-        options: {
-          mask: "*.test.js",
-
-          istanbulOptions: ["--harmony", "--handle-sigint"],
-
-          coverageFolder: "public/coverage"
-        }
-      },
-
-      integral: {
-        src: [
-          "tests/01-pre-test/**/*.test.js",
-          "tests/02-test-cases/04-integral/**/*.test.js",
-          "tests/03-post-test/**/*.test.js"
-        ],
-
-        options: {
-          mask: "*.test.js",
-
-          istanbulOptions: ["--harmony", "--handle-sigint"],
-
-          coverageFolder: "public/coverage"
-        }
-      }
     }
   });
 

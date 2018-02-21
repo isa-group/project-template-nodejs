@@ -29,9 +29,11 @@ steps:
   9.6. [HTTP requests](#http-requests).  
   9.7. [Make a server](#make-a-server).
 
-## 2. Adapt the package
+## 2. Adapt package.json
 
-First, you must adapt the `package.json` file and modify some values for defining your project.
+`package.json` lists the packages that your project depends on and allows you to specify the version of every package, making your build reproducible and easier to share with others developers.
+
+You must adapt the `package.json` file and modify some values for defining your project.
 A `package.json` is generally seemed such as the following.
 
 ```js
@@ -119,8 +121,51 @@ You MUST change the following fields:
 
 ## 4. Modify Gruntfile
 
+Grunt is a task runner that wrap up jobs into tasks that are compiled automatically. 
 After adapting `package.json`, you must select and configure Grunt tasks. It is recommended 
 to use all of the defined tasks, but now it is presented all of them and its use obligation.
+
+The steps to define a Grunt task are the following:
+
+1. Use `loadNpmTasks` to load the task.
+
+```js
+grunt.loadNpmTasks("grunt-contrib-jshint");
+```
+
+2. Specify task configuration within `initConfig`.
+
+```js
+grunt.initConfig({
+    jshint: {
+      all: ["Gruntfile.js", "src/**/*.js", "tests/**/*.js", "index.js"], 
+
+      options: {
+        jshintrc: ".jshintrc"
+      }
+    }
+})
+```
+3. Register the task by means of `registerTask`, a method that receives two parameters: 
+    - taskName: The name of the global task. Global task will be run by using `grunt [taskName]` command.
+    - taskList: The list of independents tasks wanted to be run when calling the global task.
+
+```js
+grunt.registerTask("test", ["jshint"]);
+```
+
+Custom tasks can also be defined by passing a function as second parameter as it's shown in this example:
+
+```js
+grunt.registerTask("buildOn", function() {
+    grunt.config("pkg.buildOn", grunt.template.today("yyyy-mm-dd"));
+
+    grunt.file.write(
+      "package.json",
+      JSON.stringify(grunt.config("pkg"), null, 2)
+    );
+  });
+```
 
 ### 4.1 Defined Tasks
 
@@ -255,6 +300,31 @@ dockerize: {
     }
 }
 ```
+
+## mocha-istanbul
+
+> You **MUST** use this task.
+
+This task generate coverage report of istanbul instrumented code.
+
+```js
+mocha_istanbul: {
+      full: {
+        src: [
+          "tests/**/*.test.js",
+        ],
+
+        options: {
+          mask: "*.test.js",
+
+          istanbulOptions: ["--harmony", "--handle-sigint"],
+
+          coverageFolder: "public/coverage"
+        }
+      },
+    }
+```
+Reports can be found at public/coverage folder.
 
 You must change `..options.name` to the name of your project and set up these environment
 variables on command line. 
