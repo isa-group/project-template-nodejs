@@ -301,7 +301,7 @@ dockerize: {
 }
 ```
 
-## mocha-istanbul
+#### mocha-istanbul
 
 > You **MUST** use this task.
 
