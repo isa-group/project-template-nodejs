@@ -11,16 +11,16 @@ Before starting to develop your project you must adapt this template by followin
 steps:
 
 1. Download project-template-nodejs [latest version](#latest-release).
-2. [Adapt](#1-adapt-the-package) the `package.json`.
-3. [Adapt](#2-adapt-the-bower) the `bower.json`.
-4. [Modify](#3-modify-gruntfile) `Grunfile.js` and select the tasks.   
+2. [Adapt](#adapt-the-package) the `package.json`.
+3. [Adapt](#adapt-the-bower) the `bower.json`.
+4. [Modify](#modify-gruntfile) `Grunfile.js` and select the tasks.   
   4.1. Defined Tasks.  
   4.2. Select and configure tasks.
-5. [Clear](#3-clear-changelog) CHANGELOG.md.
-6. [Remove](#4-remove-git-directory) `.git` directory.
-7. [Edit](#5-edit-the-readme) the `README.md`.
-8. [CI](#6-ci-with-travis-ci) with Travis CI.
-9. [Developing](#7-developing-your-project) your project.  
+5. [Clear](#clear-changelog) CHANGELOG.md.
+6. [Remove](#remove-git-directory) `.git` directory.
+7. [Edit](#edit-the-readme) the `README.md`.
+8. [CI](#ci-with-travis-ci) with Travis CI.
+9. [Developing](#developing-your-project) your project.  
   9.1. Using [dates](#using-dates).  
   9.2. Project's [configurations](#projects-configurations-variables) variables.  
   9.3. [Logging](#logging).  
@@ -210,15 +210,12 @@ This task executes steps that you should do for releasing a new version. You mus
 for using with your project properties. There are two type of projects, `node-application` or 
 `npm module`, Depend on the type, you must configure this tasks in different ways.
 
-For use this task you have to set two ENVIRONMENT variables in the shell:
+For use this task you have to open `Edit environment variables` window. Select `environment variables` and create two new variables for your account:
 
-- GITHUB_ACCESS_TOKEN 
-  - windows: `set GITHUB_ACCESS_TOKEN=<your-github-accestoken>`
-  - linux: `export GITHUB_ACCESS_TOKEN=<your-github-accestoken>`
+-GITHUB_ACCESS_TOKEN: Your GitHub access token (can be found in github.com at Settings>Developer Settings>Personal access tokens)
+-GITHUB_USERNAME: Your GitHub username.
 
-- GITHUB_USERNAME 
-  - windows: `set GITHUB_USERNAME=<your-github-username>`
-  - linux: `export GITHUB_USERNAME=<your-github-username>`
+You should restart your computer after saving them.
 
 If your project is a `node-application`, a server application, an API, or anything that can 
 be deployed, you must configure this task as following:
@@ -324,7 +321,7 @@ mocha_istanbul: {
       },
     }
 ```
-Reports can be found at public/coverage folder.
+Reports are generated in index.html file (public\coverage\lcov-report\index.html).
 
 You must change `..options.name` to the name of your project and set up these environment
 variables on command line. 
