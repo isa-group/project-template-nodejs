@@ -212,8 +212,8 @@ for using with your project properties. There are two type of projects, `node-ap
 
 For use this task you have to open `Edit environment variables` window. Select `environment variables` and create two new variables for your account:
 
--GITHUB_ACCESS_TOKEN: Your GitHub access token (can be found in github.com at Settings>Developer Settings>Personal access tokens)
--GITHUB_USERNAME: Your GitHub username.
+- GITHUB_ACCESS_TOKEN: Your GitHub access token (can be found in github.com at Settings>Developer Settings>Personal access tokens)
+- GITHUB_USERNAME: Your GitHub username.
 
 You should restart your computer after saving them.
 
