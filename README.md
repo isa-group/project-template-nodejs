@@ -383,6 +383,8 @@ If your new project is public you must integrate Continuous Integration with Tra
 
 Now if you go to https://travis-ci.org/{username}/{repositoryName}, you will be able to see the logs made by travis.
 
+> Grunt build task will only run when current branch equals to `master`, a pull request is not being made and commit message matches regexp ("release\s[0-9]+\.[0-9]+\.[0-9]+").
+
 ## 9. Developing your project
 
 In order to be lined up to Github philosophy, you must use 
