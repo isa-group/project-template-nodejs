@@ -11,16 +11,16 @@ Before starting to develop your project you must adapt this template by followin
 steps:
 
 1. Download project-template-nodejs [latest version](#latest-release).
-2. [Adapt](#2-adapt-package.json) the `package.json`.
-3. [Adapt](#adapt-the-bower) the `bower.json`.
-4. [Modify](#modify-gruntfile) `Grunfile.js` and select the tasks.   
+2. [Adapt](#2-adapt-packagejson) the `package.json`.
+3. [Adapt](#3-adapt-the-bower) the `bower.json`.
+4. [Modify](#4-modify-gruntfile) `Grunfile.js` and select the tasks.   
   4.1. Defined Tasks.  
   4.2. Select and configure tasks.
-5. [Clear](#clear-changelog) CHANGELOG.md.
-6. [Remove](#remove-git-directory) `.git` directory.
-7. [Edit](#edit-the-readme) the `README.md`.
-8. [CI](#ci-with-travis-ci) with Travis CI.
-9. [Developing](#developing-your-project) your project.  
+5. [Clear](#5-clear-changelog) CHANGELOG.md.
+6. [Remove](#6-remove-git-directory) `.git` directory.
+7. [Edit](#7-edit-the-readme) the `README.md`.
+8. [CI](#8-ci-with-travis-ci) with Travis CI.
+9. [Developing](#9-developing-your-project) your project.  
   9.1. Using [dates](#using-dates).  
   9.2. Project's [configurations](#projects-configurations-variables) variables.  
   9.3. [Logging](#logging).  
