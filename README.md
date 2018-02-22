@@ -11,7 +11,7 @@ Before starting to develop your project you must adapt this template by followin
 steps:
 
 1. Download project-template-nodejs [latest version](#latest-release).
-2. [Adapt](#adapt-the-package) the `package.json`.
+2. [Adapt](#adapt-package.json) the `package.json`.
 3. [Adapt](#adapt-the-bower) the `bower.json`.
 4. [Modify](#modify-gruntfile) `Grunfile.js` and select the tasks.   
   4.1. Defined Tasks.  
