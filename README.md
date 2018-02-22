@@ -27,7 +27,7 @@ steps:
   9.4. [Promise](#promise).  
   9.5. [YAML and JSON](#yaml-and-json).  
   9.6. [HTTP requests](#http-requests).  
-  9.7. [Make a server](#make-a-server).
+  9.7. [Make a server](#make-a-server).  
   9.8. [Basic usage](#basic-usage).
 
 ## 2. Adapt package.json
