@@ -28,6 +28,7 @@ steps:
   9.5. [YAML and JSON](#yaml-and-json).  
   9.6. [HTTP requests](#http-requests).  
   9.7. [Make a server](#make-a-server).
+  9.8. [Basic usage](#basic-usage).
 
 ## 2. Adapt package.json
 
@@ -572,6 +573,15 @@ var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 ```
+### Basic usage 
+
+When developing your project, first step is to install all dependencies by means of `yarn`. After running `yarn` command, yarn.lock will be generated and dependencies will be installed.
+
+- Deploying your project: To deploy your project you just need to run `npm start` command.
+- Making changes: After a backend change, you must restart the server to test it. If change is on frontend, is enough to restart browser (Ctrl + Shift + R).
+- Stoping the server: To stop execution you have to push Ctrl + C.
+- Running tests: Run `npm test` command to run grunt test task.
+
 
 ## Copyright notice
 
