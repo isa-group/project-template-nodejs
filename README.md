@@ -510,6 +510,7 @@ For technical inquiry please contact to [engineering team](./extra/about.md).
 
 ## Latest release
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ba23eaf3be224e09a0cedd6ae3df0f59)](https://app.codacy.com/app/isa-group/project-template-nodejs?utm_source=github.com&utm_medium=referral&utm_content=isa-group/project-template-nodejs&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/isa-group/project-template-nodejs.svg?branch=master)](https://travis-ci.org/http://github.com/isa-group/project-template-nodejs)
 
 The version 0.0.0 is the latest stable version of project-template-nodejs component.
