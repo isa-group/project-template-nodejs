@@ -25,12 +25,18 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-dockerize": "0.0.1",
     "grunt-header": "^1.1.0",
+<<<<<<< HEAD
+    "grunt-mocha-test": "^0.13.2",
+    "grunt-release-github": "1.0.4",
+    "mocha": "^3.2.0",
     "webpack": "^4.0.0"
+=======
     "grunt-mocha-istanbul": "^5.0.2",
     "grunt-mocha-test": "^0.13.3",
     "grunt-release-github": "^1.0.4",
     "istanbul": "^0.4.5",
     "mocha": "^3.5.3"
+>>>>>>> #229
   },
   "scripts": {
     "start": "node index.js",

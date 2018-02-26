@@ -11,27 +11,30 @@ Before starting to develop your project you must adapt this template by followin
 steps:
 
 1. Download project-template-nodejs [latest version](#latest-release).
-2. [Adapt](#1-adapt-the-package) the `package.json`.
-3. [Adapt](#2-adapt-the-bower) the `bower.json`.
-4. [Modify](#3-modify-gruntfile) `Grunfile.js` and select the tasks.   
+2. [Adapt](#2-adapt-packagejson) the `package.json`.
+3. [Adapt](#3-adapt-the-bower) the `bower.json`.
+4. [Modify](#4-modify-gruntfile) `Grunfile.js` and select the tasks.   
   4.1. Defined Tasks.  
   4.2. Select and configure tasks.
-5. [Clear](#3-clear-changelog) CHANGELOG.md.
-6. [Remove](#4-remove-git-directory) `.git` directory.
-7. [Edit](#5-edit-the-readme) the `README.md`.
-8. [CI](#6-ci-with-travis-ci) with Travis CI.
-9. [Developing](#7-developing-your-project) your project.  
+5. [Clear](#5-clear-changelog) CHANGELOG.md.
+6. [Remove](#6-remove-git-directory) `.git` directory.
+7. [Edit](#7-edit-the-readme) the `README.md`.
+8. [CI](#8-ci-with-travis-ci) with Travis CI.
+9. [Developing](#9-developing-your-project) your project.  
   9.1. Using [dates](#using-dates).  
   9.2. Project's [configurations](#projects-configurations-variables) variables.  
   9.3. [Logging](#logging).  
   9.4. [Promise](#promise).  
   9.5. [YAML and JSON](#yaml-and-json).  
   9.6. [HTTP requests](#http-requests).  
-  9.7. [Make a server](#make-a-server).
+  9.7. [Make a server](#make-a-server).  
+  9.8. [Basic usage](#basic-usage).
 
-## 2. Adapt the package
+## 2. Adapt package.json
 
-First, you must adapt the `package.json` file and modify some values for defining your project.
+`package.json` lists the packages that your project depends on and allows you to specify the version of every package, making your build reproducible and easier to share with others developers.
+
+You must adapt the `package.json` file and modify some values for defining your project.
 A `package.json` is generally seemed such as the following.
 
 ```js
@@ -119,8 +122,51 @@ You MUST change the following fields:
 
 ## 4. Modify Gruntfile
 
+Grunt is a task runner that wrap up jobs into tasks that are compiled automatically. 
 After adapting `package.json`, you must select and configure Grunt tasks. It is recommended 
 to use all of the defined tasks, but now it is presented all of them and its use obligation.
+
+The steps to define a Grunt task are the following:
+
+1. Use `loadNpmTasks` to load the task.
+
+```js
+grunt.loadNpmTasks("grunt-contrib-jshint");
+```
+
+2. Specify task configuration within `initConfig`.
+
+```js
+grunt.initConfig({
+    jshint: {
+      all: ["Gruntfile.js", "src/**/*.js", "tests/**/*.js", "index.js"], 
+
+      options: {
+        jshintrc: ".jshintrc"
+      }
+    }
+})
+```
+3. Register the task by means of `registerTask`, a method that receives two parameters: 
+    - taskName: The name of the global task. Global task will be run by using `grunt [taskName]` command.
+    - taskList: The list of independents tasks wanted to be run when calling the global task.
+
+```js
+grunt.registerTask("test", ["jshint"]);
+```
+
+Custom tasks can also be defined by passing a function as second parameter as it's shown in this example:
+
+```js
+grunt.registerTask("buildOn", function() {
+    grunt.config("pkg.buildOn", grunt.template.today("yyyy-mm-dd"));
+
+    grunt.file.write(
+      "package.json",
+      JSON.stringify(grunt.config("pkg"), null, 2)
+    );
+  });
+```
 
 ### 4.1 Defined Tasks
 
@@ -165,15 +211,12 @@ This task executes steps that you should do for releasing a new version. You mus
 for using with your project properties. There are two type of projects, `node-application` or 
 `npm module`, Depend on the type, you must configure this tasks in different ways.
 
-For use this task you have to set two ENVIRONMENT variables in the shell:
+For use this task you have to open `Edit environment variables` window. Select `environment variables` and create two new variables for your account:
 
-- GITHUB_ACCESS_TOKEN 
-  - windows: `set GITHUB_ACCESS_TOKEN=<your-github-accestoken>`
-  - linux: `export GITHUB_ACCESS_TOKEN=<your-github-accestoken>`
+- GITHUB_ACCESS_TOKEN: Your GitHub access token (can be found in github.com at Settings>Developer Settings>Personal access tokens)
+- GITHUB_USERNAME: Your GitHub username.
 
-- GITHUB_USERNAME 
-  - windows: `set GITHUB_USERNAME=<your-github-username>`
-  - linux: `export GITHUB_USERNAME=<your-github-username>`
+You should restart your computer after saving them.
 
 If your project is a `node-application`, a server application, an API, or anything that can 
 be deployed, you must configure this task as following:
@@ -256,6 +299,31 @@ dockerize: {
 }
 ```
 
+#### mocha-istanbul
+
+> You **MUST** use this task.
+
+This task generates coverage report of istanbul instrumented code.
+
+```js
+mocha_istanbul: {
+      full: {
+        src: [
+          "tests/**/*.test.js",
+        ],
+
+        options: {
+          mask: "*.test.js",
+
+          istanbulOptions: ["--harmony", "--handle-sigint"],
+
+          coverageFolder: "public/coverage"
+        }
+      },
+    }
+```
+Reports are generated in index.html file (public\coverage\lcov-report\index.html).
+
 You must change `..options.name` to the name of your project and set up these environment
 variables on command line. 
 
@@ -308,7 +376,15 @@ Clean the `README.md` and remove all lines except `## Latest release` and follow
 
 ## 8. CI with Travis CI
 
-If your new project is public you must integrate Travis CI on project setting. 
+If your new project is public you must integrate Continuous Integration with Travis CI, by following the next steps:
+
+1. Sign in to https://travis-ci.org/ using your GitHub account.
+2. In your profile page, enable the repository of your project.
+3. Update .travis.yml file if needed.
+
+Now if you go to https://travis-ci.org/{username}/{repositoryName}, you will be able to see the logs made by travis.
+
+> Grunt build task will only run when current branch equals to `master`, a pull request is not being made and commit message matches regexp ("release\s[0-9]+\.[0-9]+\.[0-9]+").
 
 ## 9. Developing your project
 
@@ -497,6 +573,15 @@ var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 ```
+### Basic usage 
+
+When developing your project, first step is to install all dependencies by means of `yarn`. After running `yarn` command, yarn.lock will be generated and dependencies will be installed.
+
+- Deploying your project: To deploy your project you just need to run `npm start` command.
+- Making changes: After a backend change, you must restart the server to test it. If change is on frontend, is enough to restart browser (Ctrl + Shift + R).
+- Stoping the server: To stop execution you have to push Ctrl + C.
+- Running tests: Run `npm test` command to run grunt test task.
+
 
 ## Copyright notice
 
