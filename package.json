@@ -27,7 +27,8 @@
     "grunt-header": "^1.1.0",
     "grunt-mocha-test": "^0.13.2",
     "grunt-release-github": "1.0.4",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "webpack": "^4.0.0"
   },
   "scripts": {
     "start": "node index.js",
