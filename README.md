@@ -361,17 +361,32 @@ more important.
 Depending on you want to do, you have to use a specific npm modules in order to be standard. All
 modules are being installed in the project before. 
 
-### Importing JS and modules in Front-End (Webpack)
+### Importing JS, CSS and modules in Front-End (Webpack)
 In order to implement WebPack, you have to use JS in a html file , first you must create a js file as entry.
 There is already one configured JS entry point (src/frontend/index.js)
-In this js file, you need to import all node-modules you need for your html view(s) related to that JS file.
+In this js file, you need to import all node-modules you need for your html view(s) related to that JS file. Example:
+```js
+//Importing angular and materialize js files.
+var angular = require('angular');
+var materialize = require('materialize-css');
+```
+
 When you build your project, WebPack will generate a new JS file (called bundles) which implement all the code in your JS, and the code of modules you call in your JS. This is the file that you need to import in your html.
-<img src="https://i.imgur.com/srPTM2T.png" width="400">
+
+<img src="https://i.imgur.com/srPTM2T.png" width="500">
+
 
 If you have multiples separated Views that use completely different JS code, you can add multiple entry points and separate code in different bundles.
 You can change this, as well as bundles destination folder, in webpack.config.js.
 
+<img src="https://i.imgur.com/aBd8HX4.png" width="500">
 
+This will generate different bundles js files, that you will need to import in your views.
+
+Also, CSS files should not be imported in views but in JS file. In order to import a CSS from a module, you only must require them in your JS file related to your view. Example (Materialize):
+```js
+require('materialize-css/dist/css/materialize.min.css');
+```
 
 ### Using dates 
 
