@@ -1,6 +1,7 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path'); 
+const webpack = require('webpack');
 // the path(s) that should be cleaned
 let pathsToClean = [
   'dist'
@@ -18,7 +19,7 @@ module.exports =
     name: 'Front-End main side, output to ./dist',
     entry: ['./src/frontend/index.js'],
     output: {
-      filename: './js-bundles/bundle.js'
+      filename: './js-bundles/[name]-bundle.js'
     },
     module: {
         rules: [
@@ -41,5 +42,6 @@ module.exports =
         new CopyWebpackPlugin([
             {from: '**/*', to: '', ignore: ['*.js']}
         ], {context: 'src/frontend/'})
+      
     ]
 };

@@ -361,6 +361,18 @@ more important.
 Depending on you want to do, you have to use a specific npm modules in order to be standard. All
 modules are being installed in the project before. 
 
+### Importing JS and modules in Front-End (Webpack)
+In order to implement WebPack, you have to use JS in a html file , first you must create a js file as entry.
+There is already one configured JS entry point (src/frontend/index.js)
+In this js file, you need to import all node-modules you need for your html view(s) related to that JS file.
+When you build your project, WebPack will generate a new JS file (called bundles) which implement all the code in your JS, and the code of modules you call in your JS. This is the file that you need to import in your html.
+![alt text](https://i.imgur.com/srPTM2T.png)
+
+If you have multiples separated Views that use completely different JS code, you can add multiple entry points and separate code in different bundles.
+You can change this, as well as bundles destination folder, in webpack.config.js.
+
+
+
 ### Using dates 
 
 If you manipulate dates and times, you must use the library [Moment JS](http://momentjs.com/).
@@ -535,7 +547,7 @@ app.use(bodyParser.json());
 
 When developing your project, first step is to install all dependencies by means of `yarn`. After running `yarn` command, yarn.lock will be generated and dependencies will be installed.
 
-- Deploying your project: To deploy your project you just need to run `npm start` command.
+- Deploying your project: To deploy your project you just need to run `npm run dev` command.
 - Making changes: After a backend change, you must restart the server to test it. If change is on frontend, is enough to restart browser (Ctrl + Shift + R).
 - Stoping the server: To stop execution you have to push Ctrl + C.
 - Running tests: Run `npm test` command to run grunt test task.
