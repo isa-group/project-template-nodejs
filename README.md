@@ -366,7 +366,7 @@ In order to implement WebPack, you have to use JS in a html file , first you mus
 There is already one configured JS entry point (src/frontend/index.js)
 In this js file, you need to import all node-modules you need for your html view(s) related to that JS file.
 When you build your project, WebPack will generate a new JS file (called bundles) which implement all the code in your JS, and the code of modules you call in your JS. This is the file that you need to import in your html.
-![alt text](https://i.imgur.com/srPTM2T.png)
+![alt text](https://i.imgur.com/srPTM2T.png){:height="50%" width="50%"}
 
 If you have multiples separated Views that use completely different JS code, you can add multiple entry points and separate code in different bundles.
 You can change this, as well as bundles destination folder, in webpack.config.js.
