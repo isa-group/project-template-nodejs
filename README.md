@@ -12,23 +12,22 @@ steps:
 
 1. Download project-template-nodejs [latest version](#latest-release).
 2. [Adapt](#2-adapt-packagejson) the `package.json`.
-3. [Adapt](#3-adapt-the-bower) the `bower.json`.
-4. [Modify](#4-modify-gruntfile) `Grunfile.js` and select the tasks.   
+3. [Modify](#4-modify-gruntfile) `Grunfile.js` and select the tasks.   
   4.1. Defined Tasks.  
   4.2. Select and configure tasks.
-5. [Clear](#5-clear-changelog) CHANGELOG.md.
-6. [Remove](#6-remove-git-directory) `.git` directory.
-7. [Edit](#7-edit-the-readme) the `README.md`.
-8. [CI](#8-ci-with-travis-ci) with Travis CI.
-9. [Developing](#9-developing-your-project) your project.  
-  9.1. Using [dates](#using-dates).  
-  9.2. Project's [configurations](#projects-configurations-variables) variables.  
-  9.3. [Logging](#logging).  
-  9.4. [Promise](#promise).  
-  9.5. [YAML and JSON](#yaml-and-json).  
-  9.6. [HTTP requests](#http-requests).  
-  9.7. [Make a server](#make-a-server).  
-  9.8. [Basic usage](#basic-usage).
+4. [Clear](#5-clear-changelog) CHANGELOG.md.
+5. [Remove](#6-remove-git-directory) `.git` directory.
+6. [Edit](#7-edit-the-readme) the `README.md`.
+7. [CI](#8-ci-with-travis-ci) with Travis CI.
+8. [Developing](#9-developing-your-project) your project.  
+  8.1. Using [dates](#using-dates).  
+  8.2. Project's [configurations](#projects-configurations-variables) variables.  
+  8.3. [Logging](#logging).  
+  8.4. [Promise](#promise).  
+  8.5. [YAML and JSON](#yaml-and-json).  
+  8.6. [HTTP requests](#http-requests).  
+  8.7. [Make a server](#make-a-server).  
+  8.8. [Basic usage](#basic-usage).
 
 ## 2. Adapt package.json
 
@@ -79,48 +78,7 @@ You MUST change the following fields:
 - **[ MUST ]** `repository.web` = Web view of your repository, Github for example.
 - **[ MUST ]** `docker.url` = If you use docker for delivering and running your app.
 
-## 3. Adapt the bower
-
-Secondly, you must adapt the `bower.json` file and modify some values for defining your front-end dependencies. A `bower.json` is generally seemed such as the following.
-
-```js
-{
-  "name": "project-template-nodejs",
-  "description": "Project Template for Node JS developments",
-  "main": "index.js",
-  "authors": [{
-    "name": "ISA group",
-    "web": "http://www.isa.us.es/"
-  }],
-  "license": "GPL-3.0+",
-  "keywords": [
-    "template",
-    "nodejs",
-    "node",
-    "project"
-  ],
-  "homepage": "https://github.com/isa-group/project-template-nodejs",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "public/bower_components/",
-    "test",
-    "tests"
-  ]
-}
-```
-
-You MUST change the following fields:
-
-- **[ MUST ]** `name` = Name of your project. 
-- **[ COULD ]** `description` = A breaf description of your proyect.
-- **[ MUST ]** `homepage` = Web or Github's homepage of your project.
-- **[ SHOULD ]** `keywords` = Key words for idenfiying your project.
-- **[ MUST ]** `author.name`= Your name or your organization name.
-- **[ MUST ]** `author.web` = Author web site.
-
-## 4. Modify Gruntfile
+## 3. Modify Gruntfile
 
 Grunt is a task runner that wrap up jobs into tasks that are compiled automatically. 
 After adapting `package.json`, you must select and configure Grunt tasks. It is recommended 
@@ -168,7 +126,7 @@ grunt.registerTask("buildOn", function() {
   });
 ```
 
-### 4.1 Defined Tasks
+### 3.1 Defined Tasks
 
 #### grunt-contrib-jshint 
 

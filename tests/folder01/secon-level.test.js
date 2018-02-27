@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
 'use strict';
 
-var lib = require('../../src');
+var lib = require('../../src/backend');
 var expect = require('chai').expect;
 
 describe('Second Level test', function () {

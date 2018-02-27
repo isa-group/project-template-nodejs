@@ -162,7 +162,11 @@ module.exports = function(grunt) {
         scripts: {
             files: ['src/**/*.js'],
             tasks: ['jshint']
-        }
+        },
+        webpackbuild: {
+          files: ['src/frontend/**/*'],
+          tasks: ['webpack'] //Run task for rebuild project with webpack
+      }
     },
 
     //USE THIS TASK FOR BUILDING AND PUSHING docker images
@@ -229,7 +233,11 @@ module.exports = function(grunt) {
     );
   }); 
 
-  // Default task(s).
+  //Task: Execute webpack for build again the project when one file is edited
+  grunt.registerTask('webpack', '', function () {
+    var exec = require('child_process').execSync;
+    var result = exec("webpack", { encoding: 'utf8' });
+});
 
   grunt.registerTask("default", ["jshint", "usebanner"]);
 

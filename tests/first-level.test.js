@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 'use strict';
 
 var expect = require('chai').expect;
-var lib = require('../src');
+var lib = require('../src/backend');
 
 
 /*

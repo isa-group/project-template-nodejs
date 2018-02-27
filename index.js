@@ -1,7 +1,7 @@
 'use strict';
 
-var src = require('./src/index');
-var logger = require('./src/logger/logger');
+var src = require('./src/backend/index');
+var logger = require('./src/backend/logger/logger');
 
 //if your project is a npm module:
 

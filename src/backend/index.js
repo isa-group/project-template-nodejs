@@ -38,7 +38,7 @@ var express = require('express'),
 var port = process.env.PORT || config.server.port;
 var app = express();
 app.use(helmet());
-app.use('/', express.static(__dirname + '/../public'));
+app.use('/', express.static(__dirname + '/../../dist'));
 app.listen(port);
 
 
