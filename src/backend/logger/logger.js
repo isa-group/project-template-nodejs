@@ -59,6 +59,7 @@ var logger = new winston.Logger({
             handleExceptions: true,
             json: false,
             maxsize: 5242880, //5MB
+            maxFiles: 10,
             colorize: false
         }),
         new winston.transports.Console({
