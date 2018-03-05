@@ -40,7 +40,7 @@
   },
   "scripts": {
     "start": "webpack && node index.js",
-    "dev": "concurrently --kill-others \"npm run start\" \"grunt watch\""
+    "dev": "concurrently --kill-others \"yarn run start\" \"grunt watch\""
   },
   "keywords": [
     "template",
