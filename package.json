@@ -36,7 +36,8 @@
     "plato": "^1.7.0",
     "webpack": "^4.0.0",
     "webpack-cli": "^2.0.9",
-    "webpack-monitor": "^1.0.14"
+    "webpack-monitor": "^1.0.14",
+    "winston-daily-rotate-file": "^1.7.2"
   },
   "scripts": {
     "start": "webpack && node index.js",

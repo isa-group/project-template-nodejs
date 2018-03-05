@@ -2,12 +2,16 @@ production:
   server: 
     port: 5000
 
-  loglevel: info
-  logfile: './logs/pro-logs.log'
+  log:
+    level: info
+    file: './logs/pro-logs.log'
+    maxDays: 365
 
 development:
   server: 
     port: 5000
     
-  loglevel: debug
-  logfile: './logs/dev-logs.log'
+  log:
+    level: debug
+    file: './logs/dev-logs.log'
+    maxDays: 365
