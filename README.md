@@ -5,29 +5,114 @@ tasks automation with [Grunt](http://gruntjs.com/).  Also, this project contains
 to use for managing: date,  logging, configuration, requests, yaml, json and promise. Finally, it has [Travis CI](https://travis-ci.org/) 
 integration too.
 
+## Basic usage 
+
+> In this guide is assumed you're using Visual Studio Code in Windows
+
+- Deploying your project
+```
+yarn start
+```
+
+This command will just deploy your project. If you're going to make changes, you better use 
+```
+yarn run dev
+```
+
+Since Webpack is used in this template project, whenever a change is made, all changed files must be updated in `/dist` folder. By using this command, you don't need to make updates by yourself.
+
+> Note that yarn run dev command deploy the project as well
+
+- Making changes: After a backend change, you must restart the server to test it. If change is on frontend, is enough to restart browser (Ctrl + Shift + R).
+- Stoping the server: To stop execution you have to push Ctrl + C.
+- Run package test suite, based on setup in package.json
+``` "scripts" : {"test" : "grunt test"} ```
+```
+yarn test
+```
+
+> To see more about testing go to [gruntfile section](#5-modify-gruntfile) and [Travis CI section](#8-ci-with-travis-ci)
+
+- Debug
+
+Set up debug configuration as following:
+```js
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Iniciar programa",
+            "program": "${workspaceFolder}\\index.js"
+        }
+    ]
+}
+```
+1. Start debugging: Press F5
+2. Stop debugging: Press Shift + F5
+3. Step into/out: Press F11 / Shift+F11 
+4. Step over: F10
+5. Show hover: Ctrl+K / Ctrl+I
+
+- Custom commands
+
+It is possible to specify custom script in scripts section on package.json file as is shown below:
+```
+ "scripts": {
+    "start": "node index.js",
+    "test": "grunt test"
+    "customScript" : "grunt default"
+  }
+```
+
+> To see more about package.json go to [adapt package.json section](#2-adapt-packagejson) 
+
+To run 'customScript', just run
+```
+yarn run customScript
+```
+
+and grunt default task will be executed.
+
+> To see more about grunt tasks and Gruntfile.js go to [modify Gruntfile section](#4-modify-gruntfile)
+
 ## How to adapt the template
 
 Before starting to develop your project you must adapt this template by following the next 
 steps:
 
-1. Download project-template-nodejs [latest version](#latest-release).
+1. Download project-template-nodejs [latest version](#1-latest-release).
 2. [Adapt](#2-adapt-packagejson) the `package.json`.
-3. [Modify](#4-modify-gruntfile) `Grunfile.js` and select the tasks.   
-  4.1. Defined Tasks.  
-  4.2. Select and configure tasks.
-4. [Clear](#5-clear-changelog) CHANGELOG.md.
-5. [Remove](#6-remove-git-directory) `.git` directory.
-6. [Edit](#7-edit-the-readme) the `README.md`.
-7. [CI](#8-ci-with-travis-ci) with Travis CI.
-8. [Developing](#9-developing-your-project) your project.  
-  8.1. Using [dates](#using-dates).  
-  8.2. Project's [configurations](#projects-configurations-variables) variables.  
-  8.3. [Logging](#logging).  
-  8.4. [Promise](#promise).  
-  8.5. [YAML and JSON](#yaml-and-json).  
-  8.6. [HTTP requests](#http-requests).  
-  8.7. [Make a server](#make-a-server).  
-  8.8. [Basic usage](#basic-usage).
+3. [Adapt](#3-adapt-the-bower) the `bower.json`.
+4. [Modify](#4-modify-gruntfile) `Grunfile.js` and select the tasks.   
+  4.1. Defined Tasks. 
+  4.2. Custom tasks
+  4.3. Select and configure tasks.
+5. [Clear](#5-clear-changelog) CHANGELOG.md.
+6. [Remove](#6-remove-git-directory) `.git` directory.
+7. [Edit](#7-edit-the-readme) the `README.md`.
+8. [CI](#8-ci-with-travis-ci) with Travis CI.
+9. [Developing](#9-developing-your-project) your project.  
+  9.1. Using [dates](#using-dates).  
+  9.2. Project's [configurations](#projects-configurations-variables) variables.  
+  9.3. [Logging](#logging).  
+  9.4. [Promise](#promise).  
+  9.5. [YAML and JSON](#yaml-and-json).  
+  9.6. [HTTP requests](#http-requests).  
+  9.7. [Make a server](#make-a-server).  
+  
+  
+## 1. Latest release
+
+[![Build Status](https://travis-ci.org/isa-group/project-template-nodejs.svg?branch=master)](https://travis-ci.org/http://github.com/isa-group/project-template-nodejs)
+
+The version 0.0.0 is the latest stable version of project-template-nodejs component.
+see [release note](http://github.com/isa-group/project-template-nodejs/releases/tag/0.0.0) for details.
+
+For running:
+
+- Download latest version from [0.0.0](http://github.com/isa-group/project-template-nodejs/releases/tag/0.0.0)
 
 ## 2. Adapt package.json
 
@@ -78,7 +163,48 @@ You MUST change the following fields:
 - **[ MUST ]** `repository.web` = Web view of your repository, Github for example.
 - **[ MUST ]** `docker.url` = If you use docker for delivering and running your app.
 
-## 3. Modify Gruntfile
+## 3. Adapt the bower
+
+Secondly, you must adapt the `bower.json` file and modify some values for defining your front-end dependencies. A `bower.json` is generally seemed such as the following.
+
+```js
+{
+  "name": "project-template-nodejs",
+  "description": "Project Template for Node JS developments",
+  "main": "index.js",
+  "authors": [{
+    "name": "ISA group",
+    "web": "http://www.isa.us.es/"
+  }],
+  "license": "GPL-3.0+",
+  "keywords": [
+    "template",
+    "nodejs",
+    "node",
+    "project"
+  ],
+  "homepage": "https://github.com/isa-group/project-template-nodejs",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components/",
+    "test",
+    "tests"
+  ]
+}
+```
+
+You MUST change the following fields:
+
+- **[ MUST ]** `name` = Name of your project. 
+- **[ COULD ]** `description` = A breaf description of your proyect.
+- **[ MUST ]** `homepage` = Web or Github's homepage of your project.
+- **[ SHOULD ]** `keywords` = Key words for idenfiying your project.
+- **[ MUST ]** `author.name`= Your name or your organization name.
+- **[ MUST ]** `author.web` = Author web site.
+
+## 4. Modify Gruntfile
 
 Grunt is a task runner that wrap up jobs into tasks that are compiled automatically. 
 After adapting `package.json`, you must select and configure Grunt tasks. It is recommended 
@@ -126,7 +252,7 @@ grunt.registerTask("buildOn", function() {
   });
 ```
 
-### 3.1 Defined Tasks
+### 4.1 Defined Tasks
 
 #### grunt-contrib-jshint 
 
@@ -285,7 +411,45 @@ Reports are generated in index.html file (public\coverage\lcov-report\index.html
 You must change `..options.name` to the name of your project and set up these environment
 variables on command line. 
 
-### 4.1 Select and Configure tasks
+### 4.2 Custom tasks
+
+You are able to define your own tasks as follows:
+
+```js
+grunt.registerTask('taskName', function () {
+       ...
+    });
+```
+
+By default, our Gruntfile.js has the following custom tasks:
+
+#### buildOn
+
+Formats today's date using the dateformat library and writes it on package.json.
+
+```js
+grunt.registerTask('buildOn', function () {
+        grunt.config('pkg.buildOn', grunt.template.today("yyyy-mm-dd"));
+        grunt.file.write('package.json', JSON.stringify(grunt.config('pkg'), null, 2));
+    });
+```
+
+#### import
+
+Drops data stored in mLab and imports it again from file.
+
+```js
+grunt.registerTask('import', 'drop and import data', function () {
+        var exec = require('child_process').execSync;
+        var uri = "mongodb://" + config.urlMongo + ":" + config.portMongo + "/" + config.dbName;
+        var fileLocation = "{yourTestFileLocation}"
+
+        var result = exec('mongoimport --uri ' + uri + ' --collection customGroups --drop --file' + fileLocation, { encoding: 'utf8' });
+        grunt.log.writeln(result);
+ });
+ ```
+
+### 4.3 Select and Configure tasks
 
 For executing default tasks run:
 
@@ -339,10 +503,51 @@ If your new project is public you must integrate Continuous Integration with Tra
 1. Sign in to https://travis-ci.org/ using your GitHub account.
 2. In your profile page, enable the repository of your project.
 3. Update .travis.yml file if needed.
+4. When using travis, we use testing environment, so you must set NODE_ENV environment variable as `testing` in your repository settings, just as is shown below:
+
+<img src="http://i65.tinypic.com/52diqh.png">
 
 Now if you go to https://travis-ci.org/{username}/{repositoryName}, you will be able to see the logs made by travis.
 
 > Grunt build task will only run when current branch equals to `master`, a pull request is not being made and commit message matches regexp ("release\s[0-9]+\.[0-9]+\.[0-9]+").
+
+### Testing database applications with Travis
+
+When developing a project that uses a Mongo database with existing data, is needed to import those data to mLab as follows:
+
+1. Log in to https://mlab.com/ using group's account (ask for credentials if needed)
+2. Create database if doesn't exist yet
+3. Go to user tab and add a new user to database
+4. Import collections
+
+Now, if you move to https://mlab.com/databases/{yourDatabase}, you will see different methods to connect. Focus on following parameters in MongoDB URI:
+
+<img src="http://i63.tinypic.com/2dub0aq.png">
+
+Those are the parameters you must specify within testing environment in config.yaml file:
+
+```js
+testing:
+  port: 8081
+  logFile: "./logs/test-logs.log"
+  loggerLevel: debug
+  urlMongo: {yellowRectangle}
+  portMongo: {redRectangle}
+  dbName: {pinkRectangle}
+```
+
+> dbuser and dbpassword parameters in urlMongo refers to database user credentials (step 3)
+
+5. Update .travis.yml file as follows:
+
+```js
+script:
+  - npm start  &
+  - sleep 10 
+  - grunt import
+  - npm test 
+```
+
 
 ## 9. Developing your project
 
@@ -558,15 +763,6 @@ var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 ```
-### Basic usage 
-
-When developing your project, first step is to install all dependencies by means of `yarn`. After running `yarn` command, yarn.lock will be generated and dependencies will be installed.
-
-- Deploying your project: To deploy your project you just need to run `npm run dev` command.
-- Making changes: After a backend change, you must restart the server to test it. If change is on frontend, is enough to restart browser (Ctrl + Shift + R).
-- Stoping the server: To stop execution you have to push Ctrl + C.
-- Running tests: Run `npm test` command to run grunt test task.
-
 
 ## Copyright notice
 
@@ -580,7 +776,6 @@ For technical inquiry please contact to [engineering team](./extra/about.md).
 
 ## Latest release
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ba23eaf3be224e09a0cedd6ae3df0f59)](https://app.codacy.com/app/isa-group/project-template-nodejs?utm_source=github.com&utm_medium=referral&utm_content=isa-group/project-template-nodejs&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/isa-group/project-template-nodejs.svg?branch=master)](https://travis-ci.org/http://github.com/isa-group/project-template-nodejs)
 
 The version 0.0.0 is the latest stable version of project-template-nodejs component.
