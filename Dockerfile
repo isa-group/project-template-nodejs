@@ -1,3 +1,12 @@
-FROM node:6.9
+LABEL maintainer="ISA Research Group <isagroup.us@gmail.com>"
 
-EXPOSE 80 8080
+FROM node:9-alpine
+
+WORKDIR /usr/app
+
+COPY package.json .
+RUN npm install --quiet
+
+COPY . .
+
+EXPOSE 80
