@@ -85,10 +85,10 @@ steps:
 1. Download project-template-nodejs [latest version](#1-latest-release).
 2. [Adapt](#2-adapt-packagejson) the `package.json`.
 3. [Adapt](#3-adapt-the-bower) the `bower.json`.
-4. [Modify](#4-modify-gruntfile) `Grunfile.js` and select the tasks.   
-  4.1. Defined Tasks. 
-  4.2. Custom tasks.
-  4.3. Select and configure tasks.
+4. [Modify](#4-modify-gruntfile) `Grunfile.js` and select the tasks.  
+  4.1. Defined Tasks.  
+  4.2. Custom tasks.  
+  4.3. Select and configure tasks.     
 5. [Clear](#5-clear-changelog) CHANGELOG.md.
 6. [Remove](#6-remove-git-directory) `.git` directory.
 7. [Edit](#7-edit-the-readme) the `README.md`.
