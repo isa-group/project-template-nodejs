@@ -15,13 +15,13 @@ yarn
 ```
 > Whenever starting a project, this is the first command you must run
 
--Adding new packages
+- Adding new packages
 ```
 yarn add materialize-css
 ```
 >Third parameter is usually the package name. To be sure about how to install a package, see its documentation.
 
--Removing new packages
+- Removing new packages
 ```
 yarn remove materialize-css
 ```
@@ -41,7 +41,9 @@ Since Webpack is used in this template project, whenever a change is made, all c
 > Note that yarn run dev command deploy the project as well
 
 - Making changes: After a backend change, you must restart the server to test it. If change is on frontend, is enough to restart browser (Ctrl + Shift + R).
+
 - Stoping the server: To stop execution you have to push Ctrl + C.
+
 - Run package test suite, based on setup in package.json
 ``` "scripts" : {"test" : "grunt test"} ```
 ```
@@ -102,9 +104,9 @@ steps:
 1. Download project-template-nodejs [latest version](#1-latest-release).
 2. [Adapt](#2-adapt-packagejson) the `package.json`.
 3. [Modify](#3-modify-gruntfile) `Grunfile.js` and select the tasks.  
-  3.1. Defined Tasks.  
-  3.2. Custom tasks.  
-  3.3. Select and configure tasks.     
+  3.1. [Defined tasks](#defined-tasks).  
+  3.2. [Custom tasks](#custom-tasks).  
+  3.3. [Select and configure tasks](#select-and-configure-tasks).     
 4. [Clear](#4-clear-changelog) CHANGELOG.md.
 5. [Remove](#5-remove-git-directory) `.git` directory.
 6. [Edit](#6-edit-the-readme) the `README.md`.
@@ -228,7 +230,7 @@ grunt.registerTask("buildOn", function() {
   });
 ```
 
-### 3.1 Defined Tasks
+### 3.1 Defined tasks
 
 #### grunt-contrib-jshint 
 
@@ -285,7 +287,6 @@ be deployed, you must configure this task as following:
 release: {
     options: {
         changelog: true, //NOT CHANGE
-        changelogFromGithub: true, //NOT CHANGE
         githubReleaseBody: 'See [CHANGELOG.md](./CHANGELOG.md) for details.', //NOT CHANGE
         npm: false, //CHANGE TO TRUE IF YOUR PROJECT IS A NPM MODULE 
         //npmtag: true, //default: no tag
@@ -305,7 +306,6 @@ If your project is a `npm module` you must configure this task as following:
 release: {
     options: {
         changelog: true, //NOT CHANGE
-        changelogFromGithub: true, //NOT CHANGE
         githubReleaseBody: 'See [CHANGELOG.md](./CHANGELOG.md) for details.', //NOT CHANGE
         npm: true, //CHANGE TO TRUE IF YOUR PROJECT IS A NPM MODULE 
         //npmtag: true, //default: no tag
@@ -382,10 +382,7 @@ mocha_istanbul: {
       },
     }
 ```
-Reports are generated in index.html file (public\coverage\lcov-report\index.html).
-
-You must change `..options.name` to the name of your project and set up these environment
-variables on command line. 
+Reports are generated in index.html file (src\backend\coverage\lcov-report\index.html).
 
 ### 3.2 Custom tasks
 

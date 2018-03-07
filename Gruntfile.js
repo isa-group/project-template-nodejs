@@ -78,7 +78,7 @@ module.exports = function (grunt) {
 
         //Lint JS 
         jshint: {
-            all: ['Gruntfile.js', 'src/(!report/)**/*.js', 'tests/**/*.js', 'index.js'], //If you want to inspect more file, you change this.
+            all: ['Gruntfile.js','src/**/*.js', '!**/frontend/report/**', '!**/frontend/coverage/**','tests/**/*.js', 'index.js'], //If you want to inspect more file, you change this.
             options: {
                 jshintrc: '.jshintrc'
             }
@@ -130,21 +130,18 @@ module.exports = function (grunt) {
         },
 
         mocha_istanbul: {
-          full: {
-            src: [
-              "tests/01-pre-test/**/*.test.js",
-              "tests/02-test-cases/**/*.test.js",
-              "tests/03-post-test/**/*.test.js"
-            ],
-    
-            options: {
-              mask: "*.test.js",
-    
-              istanbulOptions: ["--harmony", "--handle-sigint"],
-    
-              coverageFolder: "public/coverage"
-            }
-          }},
+            full: {
+              src: [
+                "tests/**/*.test.js",
+  
+              ],
+      
+              options: {
+                mask: "*.test.js",
+                istanbulOptions: ["--harmony", "--handle-sigint"],
+                coverageFolder: "src/backend/coverage"
+              }
+            }},
 
         //USE THIS TASK FOR BUILDING AND PUSHING docker images
         dockerize: {
