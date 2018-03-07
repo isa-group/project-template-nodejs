@@ -84,15 +84,15 @@ steps:
 
 1. Download project-template-nodejs [latest version](#1-latest-release).
 2. [Adapt](#2-adapt-packagejson) the `package.json`.
-3. [Modify](#4-modify-gruntfile) `Grunfile.js` and select the tasks.  
+3. [Modify](#3-modify-gruntfile) `Grunfile.js` and select the tasks.  
   3.1. Defined Tasks.  
   3.2. Custom tasks.  
   3.3. Select and configure tasks.     
-4. [Clear](#5-clear-changelog) CHANGELOG.md.
-5. [Remove](#6-remove-git-directory) `.git` directory.
-6. [Edit](#7-edit-the-readme) the `README.md`.
-7. [CI](#8-ci-with-travis-ci) with Travis CI.
-8. [Developing](#9-developing-your-project) your project.  
+4. [Clear](#4-clear-changelog) CHANGELOG.md.
+5. [Remove](#5-remove-git-directory) `.git` directory.
+6. [Edit](#6-edit-the-readme) the `README.md`.
+7. [CI](#7-ci-with-travis-ci) with Travis CI.
+8. [Developing](#8-developing-your-project) your project.  
   8.1. Using [dates](#using-dates).  
   8.2. Project's [configurations](#projects-configurations-variables) variables.  
   8.3. [Logging](#logging).  
