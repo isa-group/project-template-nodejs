@@ -9,6 +9,23 @@ integration too.
 
 > In this guide is assumed you're using Visual Studio Code in Windows
 
+- Installing dependencies
+```
+yarn
+```
+> Whenever starting a project, this is the first command you must run
+
+-Adding new packages
+```
+yarn add materialize-css
+```
+>Third parameter is usually the package name. To be sure about how to install a package, see its documentation.
+
+-Removing new packages
+```
+yarn remove materialize-css
+```
+
 - Deploying your project
 ```
 yarn start
