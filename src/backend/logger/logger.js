@@ -54,18 +54,18 @@ var logger = new winston.Logger({
   levels: customLeves.levels,
   colors: customLeves.colors,
   transports: [
+    //Separate log files by year, month and days in folders and files.
     new winston.transports.DailyRotateFile({
-      createTree: true,
+      createTree: false, //Create the tree folder specified in datePattern with /
       level: config.log.level,
-      prepend: true,
+      prepend: false, //datePattern is placed first in the name of file
       filename: config.log.file,
+      maxsize: config.log.maxSize,
+      maxFiles: config.log.maxFiles,
       handleExceptions: true,
       json: false,
       maxDays: config.log.maxDays,
-      datePattern: "/yyyy/MM/dd."
-      //   maxsize: 5242880, //5MB
-      //   maxFiles: 10,
-      //   colorize: false,
+      datePattern: "yyyy-MM-dd."
     }),
     new winston.transports.Console({
       level: config.loglevel,

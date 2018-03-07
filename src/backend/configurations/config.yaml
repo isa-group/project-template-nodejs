@@ -4,8 +4,10 @@ production:
 
   log:
     level: info
-    file: './logs/pro-logs.log'
-    maxDays: 365
+    file: './logs/pro-logs.log' #Where log file will be saved. Date will be concatenated before the name.
+    maxDays: 30 # Days is the max log file old. Older files will be deleted.
+    maxSize: 10000000 #(100MB) Maximum file log size, if one file reaches it, a new file is created.
+    maxFiles: 5 # Max Files that can be created per day reaching the maxSize.
 
 development:
   server: 
@@ -13,5 +15,7 @@ development:
     
   log:
     level: debug
-    file: './logs/dev-logs.log'
-    maxDays: 365
+    file: './logs/dev-logs.log-' #Where log file will be saved. Date will be concatenated before the name.
+    maxDays: 30 # Days is the max log file old. Older files will be deleted.
+    maxSize: 30 #(100MB) Maximum file log size, if one file reaches it, a new file is created.
+    maxFiles: 4 # Max Files that can be created per day reaching the maxSize.
