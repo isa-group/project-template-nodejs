@@ -25,7 +25,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
  * */
 
 var winston = require('winston');
-require("winston-daily-rotate-file");
 var config = require('../configurations/config');
 
 /**
@@ -49,23 +48,19 @@ var customLeves = {
 };
 
 winston.emitErrs = true;
-
 var logger = new winston.Logger({
   levels: customLeves.levels,
   colors: customLeves.colors,
   transports: [
-    //Separate log files by year, month and days in folders and files.
-    new winston.transports.DailyRotateFile({
-      createTree: false, //Create the tree folder specified in datePattern with /
+    new winston.transports.File({
+      createTree: false,
       level: config.log.level,
-      prepend: false, //datePattern is placed first in the name of file
       filename: config.log.file,
-      maxsize: config.log.maxSize,
-      maxFiles: config.log.maxFiles,
       handleExceptions: true,
       json: false,
-      maxDays: config.log.maxDays,
-      datePattern: "yyyy-MM-dd."
+      tailable: true,
+      maxsize: config.log.maxSize,
+      maxFiles: config.log.maxFiles,
     }),
     new winston.transports.Console({
       level: config.loglevel,
