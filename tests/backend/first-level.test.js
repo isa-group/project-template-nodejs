@@ -17,21 +17,21 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
+"use strict";
 
-'use strict';
+var expect = require("chai").expect;
+var lib = require("../../src/backend");
 
-var lib = require('../../src/backend');
-var expect = require('chai').expect;
+/*
+ * USE MOCHA AND CHAI for testing your code
+ */
+describe("First Level test", function() {
+  this.timeout(10000);
+  it("Execute", done => {
+    var result = lib.myfunction("test", "1");
 
-describe('Second Level test', function () {
-    it('Execute', (done) => {
+    expect(result).to.be.equal("test-1");
 
-        lib.myPromiseFunction("test", "2").then(function (result) {
-            expect(result).to.be.equal("test-2");
-            done();
-        }, function (error) {
-            done(error);
-        });
-
-    });
+    done();
+  });
 });
