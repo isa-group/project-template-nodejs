@@ -49,7 +49,9 @@ jspm_packages
 # Yarn Integrity file
 .yarn-integrity
 
-
+### webpack ###
+# webpack bundles
+src/frontend/js-bundles/
 
 ### grunt ###
 # Grunt usually compiles files inside this directory

@@ -1,30 +1,22 @@
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const path = require('path'); 
-const webpack = require('webpack');
-
-// the path(s) that should be cleaned 
-let pathsToClean = ['dist']; //Dist is the front-end folder that express upload to the web
-
-// the clean options to use
-let cleanOptions = {
-  // Verbose: true-> Write logs to console
-  verbose: true,
-  // Set dry: true for test/emulate file cleaning without removing files.
-  dry: false
-};
+const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
   mode: "development", //Development or production mode.
-  name: "Front-End main side, output to ./dist",
-  entry: ["./src/frontend/index.js"],
+  name: "Front-End main side, output to ./src/frontend/js-bundles",
+  entry: {
+    main: "./src/frontend/index.js",
+    example: "./src/frontend/random.js"
+  },
   output: {
-    filename: "./js-bundles/[name]-bundle.js"
+    path: __dirname + "/src/frontend/js-bundles/",
+    filename: "[name]-bundle.js"
   },
   resolve: {
     //TODO: Documentation
     alias: {
-      jquery: "jquery/src/jquery"
+      jquery: "jquery/src/jquery",
+      $: "jquery/src/jquery"
     }
   },
   module: {
@@ -35,12 +27,12 @@ module.exports = {
       {
         test: /\.woff$/,
         loader:
-          "url-loader?limit=65000&mimetype=application/font-woff&name=dist/fonts/[name].[ext]"
+          "url-loader?limit=65000&mimetype=application/font-woff&name=fonts/[name].[ext]"
       },
       {
         test: /\.woff2$/,
         loader:
-          "url-loader?limit=65000&mimetype=application/font-woff2&name=dist/fonts/[name].[ext]"
+          "url-loader?limit=65000&mimetype=application/font-woff2&name=fonts/[name].[ext]"
       },
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -58,11 +50,10 @@ module.exports = {
   //For more options (related to speed/correlation to original source code file) you can visit https://webpack.js.org/configuration/devtool/
   devtool: "cheap-module-eval-source-map",
   plugins: [
-    //Plugin for clean 'dist/' folder before compile all the bundles and files again with webpack.
-    new CleanWebpackPlugin(pathsToClean, cleanOptions),
-    //Copy all files that webpack does not move from /frontend folder to /dist folder.
-    new CopyWebpackPlugin([{ from: "**/*", to: "", ignore: ["*.js"] }], {
-      context: "src/frontend/"
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+      }
     })
   ]
 };
