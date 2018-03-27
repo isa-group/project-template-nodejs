@@ -1,5 +1,5 @@
 /*!
-project-template-nodejs 0.0.0, built on: 2018-03-26
+project-template-nodejs 1.1.0, built on: 2018-03-27
 Copyright (C) 2018 ISA group
 http://www.isa.us.es/
 https://github.com/isa-group/project-template-nodejs
@@ -22,7 +22,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
  * USED ENV VARS:
  * 
  ** GITHUB_ACCESS_TOKEN
- ** GITHUB_REPO
  ** GITHUB_USERNAME
  ** DOCKER_HUB_EMAIL
  ** DOCKER_HUB_USERNAME
@@ -31,7 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
  * CHANGES TO BE PERFORMED:
  * 
  ** REPLACE "<my-image-name>" by your DockerHub image (without user)
- ** REPLACE "<my-github-repo>" by your github repo. Eg isa-group/secret-project
+ ** REPLACE "<my-github-repo>" by your github repo. Eg. isa-group/project-template-nodejs
  * 
  */
 
@@ -156,7 +155,7 @@ module.exports = function (grunt) {
                 afterRelease: [],
                 updateVars: ['pkg'],
                 github: {
-                    repo: "<my-github-repo>",
+                    repo: "isa-group/project-template-nodejs",
                     accessTokenVar: "GITHUB_ACCESS_TOKEN",
                     usernameVar: "GITHUB_USERNAME"
                 }
@@ -216,7 +215,7 @@ module.exports = function (grunt) {
     //** HOW YO USE THEM: load env vars -next-> grunt build -next-> grunt release:xxx -next-> grunt deliver */
 
     //BUILD TASK
-    grunt.registerTask('build', ['test', 'buildOn', 'usebanner']);
+    grunt.registerTask('build', ['buildOn', 'usebanner']);
 
     //RELEASE TASK
     // already defined. Usage: grunt release:0.0.1" for patch versions; grunt release:0.1.0" for minor versions; grunt release:1.0.0" for major versions
