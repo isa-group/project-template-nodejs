@@ -9,9 +9,9 @@ integration too.
 
 > In this guide is assumed you're using Visual Studio Code in Windows
 
-- Installing dependencies
+- Installing dependencies. If a problem related to engines appear, add `--ignore-engines` option
 ```
-yarn
+yarn install
 ```
 > Whenever starting a project, this is the first command you must run
 
@@ -42,7 +42,7 @@ Since Webpack is used in this template project, whenever a change is made, all c
 
 - Making changes: After a backend change, you must restart the server to test it. If change is on frontend, is enough to restart browser (Ctrl + Shift + R).
 
-- Stoping the server: To stop execution you have to push Ctrl + C.
+- Stopping the server: To stop execution you have to push Ctrl + C.
 
 - Run package test suite, based on setup in package.json
 ``` "scripts" : {"test" : "grunt test"} ```
@@ -172,9 +172,9 @@ A `package.json` is generally seemed such as the following.
 You MUST change the following fields:
 
 - **[ MUST ]** `name` = Name of your project. 
-- **[ COULD ]** `description` = A breaf description of your proyect.
+- **[ COULD ]** `description` = A brief description of your project.
 - **[ MUST ]** `homepage` = Web or Github's homepage of your project.
-- **[ SHOULD ]** `keywords` = Key words for idenfiying your project.
+- **[ SHOULD ]** `keywords` = Key words for identifying your project.
 - **[ MUST ]** `author.name`= Your name or your organization name.
 - **[ MUST ]** `author.web` = Author web site.
 - **[ MUST ]** `repository.url` = Location of your repository.
@@ -363,7 +363,7 @@ dockerize: {
 
 > You **MUST** use this task.
 
-This task generates coverage report of istanbul instrumented code.
+This task generates coverage report of Istanbul instrumented code.
 
 ```js
 mocha_istanbul: {
@@ -398,7 +398,7 @@ By default, our Gruntfile.js has the following custom tasks:
 
 #### buildOn
 
-Formats today's date using the dateformat library and writes it on package.json.
+Formats today's date using the date-format library and writes it on package.json.
 
 ```js
 grunt.registerTask('buildOn', function () {
@@ -555,7 +555,7 @@ When you build your project, WebPack will generate a new JS file (called bundles
 
 
 If you have multiples separated Views that use completely different JS code, you can add multiple entry points and separate code in different bundles.
-You can change this, as well as bundles destination folder, in webpack.config.js.
+You can change this, as well as bundles destination folder, in webpack.index.js.
 
 <img src="https://i.imgur.com/aBd8HX4.png" width="500">
 
@@ -607,7 +607,7 @@ to execute `config.addConfiguration`, it is excecuted by default.
 ### Logging
 
 If it is necessary to use a logger, you must use the logger which is exported 
-on `src/logger/logger.js` as in the example:
+on `src/logger/index.js` as in the example:
 
 ```js
 var logger = require('./logger/logger');
@@ -616,10 +616,10 @@ logger.info('Hello world!');
 ```
 
 In addition, you can configure the logger and use your own levels. You only have to add levels 
-to `src/logger/logger.js`
+to `src/logger/index.js`
 
 ```js
-var customLeves = {
+var customLevels = {
     levels: {
         error: 7,
         warning: 8,
@@ -671,7 +671,7 @@ function _myPromiseFunction(param1, param2) {
         if (param1 && param2) {
             resolve(param1 + "-" + param2);
         } else {
-            reject(new Error("Params are require"));
+            reject(new Error("Params are required"));
         }
     });
 
