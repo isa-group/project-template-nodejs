@@ -1,6 +1,8 @@
 production:
   server: 
     port: 5000
+    bypassCORS: true
+    useHelmet: true
 
   log:
     level: info
@@ -11,6 +13,8 @@ production:
 development:
   server: 
     port: 5000
+    bypassCORS: true
+    useHelmet: true
     
   log:
     level: debug
@@ -21,6 +25,8 @@ development:
 testing:
   server:
     port: 5000
+    bypassCORS: true
+    useHelmet: true
 
   log:
     file: './logs/test-logs.log' #Where log file will be saved. Date will be concatenated before the name.
