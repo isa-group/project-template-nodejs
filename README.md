@@ -120,18 +120,11 @@ steps:
   9.5. [YAML and JSON](#yaml-and-json).  
   9.6. [HTTP requests](#http-requests).  
   9.7. [Make a server](#make-a-server).  
-  
+10. How to make a release and deliver
   
 ## 1. Latest release
 
-[![Build Status](https://travis-ci.org/isa-group/project-template-nodejs.svg?branch=master)](https://travis-ci.org/http://github.com/isa-group/project-template-nodejs)
-
-The version 0.0.0 is the latest stable version of project-template-nodejs component.
-see [release note](http://github.com/isa-group/project-template-nodejs/releases/tag/0.0.0) for details.
-
-For running:
-
-- Download latest version from [0.0.0](http://github.com/isa-group/project-template-nodejs/releases/tag/0.0.0)
+See at the bottom.
 
 ## 2. Adapt package.json
 
@@ -783,6 +776,30 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 ```
 
+
+10. How to make a release and deliver
+
+### PRECONDITIONS
+  - There is a milestone named "vA.B.C" (being A,B,C digits [0-9])
+  - Every issue should be attached to a certain milestone
+  - Your system has the follwing envirnment variables set:
+    - GITHUB_ACCESS_TOKEN
+    - GITHUB_USERNAME
+    - DOCKER_HUB_EMAIL
+    - DOCKER_HUB_USERNAME
+    - DOCKER_HUB_PASSWORD
+  - You have rename these two strings in he Gruntfile.js
+    - `<my-image-name>` by your DockerHub image (without user)
+    - `<my-github-repo>` by your github repo. Eg. isa-group/project-template-nodejs
+
+### ACTIONS
+  1. Make sure your issues for the milestone vA.B.C are closed and merged with `develop`
+  1. Update package.json with your desired version A.B.C
+  1. Run `grunt build`
+  1. Run `grunt release:A:B:C`
+  1. Optionally, build the Docker image and publish it running `grunt deliver`
+ 
+  
 ## Copyright notice
 
 **project-template-nodejs** is open-source software available under the GNU General Public License (GPL) version 3 (GPL v3).
