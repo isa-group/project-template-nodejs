@@ -139,9 +139,9 @@ module.exports = function (grunt) {
         //MAKE A RELEASE IN GITHUB
         /**
          * Usage:
-         *   grunt release" for patch version
-         *   grunt release:minor" for minor version
-         *   grunt release:major" for major version
+         *   grunt release:0.0.1" for patch versions
+         *   grunt release:0.1.0" for minor versions
+         *   grunt release:1.0.0" for major versions
          * */
         release: {
             options: {
@@ -219,7 +219,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', ['test', 'buildOn', 'usebanner']);
 
     //RELEASE TASK
-    // already defined. Usage: release" for patch version; release:minor" for minor version; grunt release:major" for major version
+    // already defined. Usage: grunt release:0.0.1" for patch versions; grunt release:0.1.0" for minor versions; grunt release:1.0.0" for major versions
 
     //DELIVER TASK
     grunt.registerTask('deliver', ['test', 'dockerize']);
