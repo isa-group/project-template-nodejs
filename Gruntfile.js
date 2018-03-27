@@ -146,6 +146,7 @@ module.exports = function (grunt) {
         release: {
             options: {
                 changelog: true,
+                changelogFromGithub: true,
                 githubReleaseBody: 'See [CHANGELOG.md](./CHANGELOG.md) for details.',
                 npm: false, //CHANGE TO TRUE IF YOUR PROJECT IS A NPM MODULE 
                 //npmtag: true, //default: no tag
