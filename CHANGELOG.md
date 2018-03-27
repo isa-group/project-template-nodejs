@@ -1,3 +1,7 @@
+### v1.1.1 - 2018-03-27
+
+- [#50](https://github.com/isa-group/project-template-nodejs/issues/50) - Add more information about how to release
+
 ### v1.1.0 - 2018-03-27
 
 - [#49](https://github.com/isa-group/project-template-nodejs/issues/49) - Integrate changes previously made

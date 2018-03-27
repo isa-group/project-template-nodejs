@@ -1,5 +1,5 @@
 /*!
-project-template-nodejs 1.1.0, built on: 2018-03-27
+project-template-nodejs 1.1.1, built on: 2018-03-27
 Copyright (C) 2018 ISA group
 http://www.isa.us.es/
 https://github.com/isa-group/project-template-nodejs

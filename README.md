@@ -814,9 +814,9 @@ For technical inquiry please contact to [engineering team](./extra/about.md).
 
 [![Build Status](https://travis-ci.org/isa-group/project-template-nodejs.svg?branch=master)](https://travis-ci.org/http://github.com/isa-group/project-template-nodejs)
 
-The version 1.1.0 is the latest stable version of project-template-nodejs component.
-see [release note](http://github.com/isa-group/project-template-nodejs/releases/tag/1.1.0) for details.
+The version 1.1.1 is the latest stable version of project-template-nodejs component.
+see [release note](http://github.com/isa-group/project-template-nodejs/releases/tag/1.1.1) for details.
 
 For running:
 
-- Download latest version from [1.1.0](http://github.com/isa-group/project-template-nodejs/releases/tag/1.1.0)
+- Download latest version from [1.1.1](http://github.com/isa-group/project-template-nodejs/releases/tag/1.1.1)

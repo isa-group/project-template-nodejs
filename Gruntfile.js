@@ -1,5 +1,5 @@
 /*!
-project-template-nodejs 1.1.0, built on: 2018-03-27
+project-template-nodejs 1.1.1, built on: 2018-03-27
 Copyright (C) 2018 ISA group
 http://www.isa.us.es/
 https://github.com/isa-group/project-template-nodejs
@@ -215,7 +215,7 @@ module.exports = function (grunt) {
     //** HOW YO USE THEM: load env vars -next-> grunt build -next-> grunt release:xxx -next-> grunt deliver */
 
     //BUILD TASK
-    grunt.registerTask('build', ['buildOn', 'usebanner']);
+    grunt.registerTask('build', ['test','buildOn', 'usebanner']);
 
     //RELEASE TASK
     // already defined. Usage: grunt release:0.0.1" for patch versions; grunt release:0.1.0" for minor versions; grunt release:1.0.0" for major versions
