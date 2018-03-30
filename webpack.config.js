@@ -5,8 +5,7 @@ module.exports = {
   mode: "development", //Development or production mode.
   name: "Front-End main side, output to ./src/frontend/js-bundles",
   entry: {
-    main: "./src/frontend/index.js",
-    example: "./src/frontend/random.js"
+    main: "./src/frontend/index.js"
   },
   output: {
     path: __dirname + "/src/frontend/js-bundles/",

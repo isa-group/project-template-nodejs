@@ -48,12 +48,7 @@
     "dev": "concurrently --kill-others \"yarn run start\" \"grunt watch\"",
     "test": "yarn grunt test"
   },
-  "keywords": [
-    "template",
-    "nodejs",
-    "node",
-    "project"
-  ],
+  "keywords": ["template", "nodejs", "node", "project"],
   "author": {
     "name": "ISA group",
     "web": "http://www.isa.us.es/"

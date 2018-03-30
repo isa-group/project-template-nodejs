@@ -17,18 +17,17 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
-
-'use strict';
+"use strict";
 
 /*
  * Put here your dependecies
  */
-var express = require('express'),
-    helmet = require('helmet'),
-    logger = require('./logger/logger'),
-    moment = require('moment'),
-    Promise = require('bluebird'),
-    config = require('./configurations/config');
+var express = require("express"),
+  helmet = require("helmet"),
+  logger = require("./logger/logger"),
+  moment = require("moment"),
+  Promise = require("bluebird"),
+  config = require("./configurations/config");
 
 /*
  * If you are going to use express, please include helmet library 
@@ -38,42 +37,37 @@ var express = require('express'),
 var port = process.env.PORT || config.server.port;
 var app = express();
 app.use(helmet());
-app.use('/', express.static(__dirname + '/../../dist'));
-app.listen(port);
-
+app.use("/", express.static(__dirname + "/../../dist"));
+var server = app.listen(port);
 
 /*
  * Export functions and Objects
  */
 module.exports = {
-    myfunction: _myfunction,
-    myPromiseFunction: _myPromiseFunction
+  myfunction: _myfunction,
+  myPromiseFunction: _myPromiseFunction,
+  expressServer: server
 };
-
 
 /*
  * Implement the functions
  */
 function _myfunction(param1, param2) {
+  logger.info("Hello world!");
+  logger.info("Param1: %s", param1);
+  logger.info("Param2: %s", param2);
 
-    logger.info('Hello world!');
-    logger.info('Param1: %s', param1);
-    logger.info('Param2: %s', param2);
+  logger.custom("Date: %s", moment().toISOString());
 
-    logger.custom('Date: %s', moment().toISOString());
-
-    return param1 + "-" + param2;
-
+  return param1 + "-" + param2;
 }
 
 function _myPromiseFunction(param1, param2) {
-
-    return new Promise(function (resolve, reject) {
-        if (param1 && param2) {
-            resolve(param1 + "-" + param2);
-        } else {
-            reject(new Error("Params are required"));
-        }
-    });
-
+  return new Promise(function (resolve, reject) {
+    if (param1 && param2) {
+      resolve(param1 + "-" + param2);
+    } else {
+      reject(new Error("Params are required"));
+    }
+  });
 }
