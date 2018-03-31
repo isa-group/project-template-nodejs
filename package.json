@@ -53,12 +53,7 @@
     "release:major": "grunt release:major",
     "deliver": "grunt deliver"
   },
-  "keywords": [
-    "template",
-    "nodejs",
-    "node",
-    "project"
-  ],
+  "keywords": ["template", "nodejs", "node", "project"],
   "author": {
     "name": "ISA group",
     "web": "http://www.isa.us.es/"

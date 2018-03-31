@@ -17,8 +17,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
-
-'use strict';
+"use strict";
 
 /*
  * Put here your dependencies
@@ -83,7 +82,6 @@ module.exports = {
   myPromiseFunction: _myPromiseFunction
 };
 
-
 /*
  * Implement the functions
  */
@@ -97,6 +95,9 @@ function _close(callback) {
 }
 
 function _myfunction(param1, param2) {
+  logger.info("Hello world!");
+  logger.info("Param1: %s", param1);
+  logger.info("Param2: %s", param2);
 
   logger.info('Hello world!');
   logger.info('Param1: %s', param1);
@@ -106,10 +107,10 @@ function _myfunction(param1, param2) {
 
   return param1 + "-" + param2;
 
+  return param1 + "-" + param2;
 }
 
 function _myPromiseFunction(param1, param2) {
-
   return new Promise(function (resolve, reject) {
     if (param1 && param2) {
       resolve(param1 + "-" + param2);
@@ -117,5 +118,4 @@ function _myPromiseFunction(param1, param2) {
       reject(new Error("Params are required"));
     }
   });
-
 }

@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var server = require('./src/backend/index');
 var logger = require('./src/backend/logger');
@@ -11,9 +11,11 @@ module.exports = server;
 
 server.myPromiseFunction("1", "2").then(function (solution) {
     logger.info(solution);
-}, function (err) {
+  },
+  function(err) {
     logger.error(err);
-});
+  }
+);
 
 // quit on ctrl-c when running docker in terminal
 process.on('SIGINT', function onSigint() {
