@@ -1,8 +1,13 @@
 {
-    "jshint.config": ".jshintrc",
-    "debug.allowBreakpointsEverywhere": true,
-    "editor.formatOnSave": true,
-    "extensions.autoUpdate": true,
-    "editor.tabSize": 4,
-    "editor.insertSpaces": true
-} 
+  "jshint.config": ".jshintrc",
+  "debug.allowBreakpointsEverywhere": true,
+  "editor.formatOnSave": true,
+  "extensions.autoUpdate": true,
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/js-bundles": true
+  }
+}
