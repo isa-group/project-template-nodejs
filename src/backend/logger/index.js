@@ -15,17 +15,16 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
+along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-
-'use strict';
+'use strict'
 
 /**
  * Module dependencies.
  * */
 
-var winston = require('winston');
-var config = require('../configurations');
+var winston = require('winston')
+var config = require('../configurations')
 
 /**
  * Configure here your custom levels.
@@ -45,9 +44,9 @@ var customLevels = {
     info: 'white',
     debug: 'black'
   }
-};
+}
 
-winston.emitErrs = true;
+winston.emitErrs = true
 var logger = new winston.Logger({
   levels: customLevels.levels,
   colors: customLevels.colors,
@@ -60,7 +59,7 @@ var logger = new winston.Logger({
       json: false,
       tailable: true,
       maxsize: config.log.maxSize,
-      maxFiles: config.log.maxFiles,
+      maxFiles: config.log.maxFiles
     }),
     new winston.transports.Console({
       level: config.loglevel,
@@ -71,9 +70,9 @@ var logger = new winston.Logger({
     })
   ],
   exitOnError: false
-});
+})
 
 /*
  * Export functions and Objects
  */
-module.exports = logger;
+module.exports = logger

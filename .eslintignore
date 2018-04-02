@@ -1,0 +1,4 @@
+/src/frontend/js-bundles/**
+/src/frontend/report/**
+/tests/backend/coverage/**
+/yarn.lock

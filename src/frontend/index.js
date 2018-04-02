@@ -15,6 +15,6 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
+along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-//index.js -> Entry point for webpack. You must require here all the modules or js that you need for your html, for example materialize.
+// index.js -> Entry point for webpack. You must require here all the modules or js that you need for your html, for example materialize.

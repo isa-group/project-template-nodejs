@@ -15,49 +15,47 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
+along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-
-'use strict';
-
+'use strict'
 
 /**
  * Module dependencies.
  * */
 
-var jsyaml = require('js-yaml');
-var fs = require('fs');
-var path = require('path');
+var jsyaml = require('js-yaml')
+var fs = require('fs')
+var path = require('path')
 
 /*
  * Export functions and Objects
  */
 var config = {
-    addConfiguration: _addConfiguration
-};
+  addConfiguration: _addConfiguration
+}
 
-module.exports = config;
+module.exports = config
 
 /*
  * Implement the functions
  */
-function _addConfiguration(uri, encoding) {
-    var configString = null;
+function _addConfiguration (uri, encoding) {
+  var configString = null
 
-    if (!uri) {
-        throw new Error("Parameter URI is required");
-    } else {
-        configString = fs.readFileSync(path.join(__dirname, uri), encoding);
-    }
+  if (!uri) {
+    throw new Error('Parameter URI is required')
+  } else {
+    configString = fs.readFileSync(path.join(__dirname, uri), encoding)
+  }
 
-    var newConfigurations = jsyaml.safeLoad(configString)[process.env.NODE_ENV ? process.env.NODE_ENV : 'development'];
+  var newConfigurations = jsyaml.safeLoad(configString)[process.env.NODE_ENV ? process.env.NODE_ENV : 'development']
 
-    for (var c in newConfigurations) {
-        this[c] = newConfigurations[c];
-    }
+  for (var c in newConfigurations) {
+    this[c] = newConfigurations[c]
+  }
 }
 
 /*
  * Setup default config location
  */
-config.addConfiguration('config.yaml', 'utf8');
+config.addConfiguration('config.yaml', 'utf8')

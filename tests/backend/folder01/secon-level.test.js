@@ -15,23 +15,23 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
+along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-"use strict";
+'use strict'
 
-var lib = require("../../../src/backend");
-var expect = require("chai").expect;
+var lib = require('../../../src/backend')
+var expect = require('chai').expect
 
-describe("Second Level test", function() {
-  it("Execute", done => {
-    lib.myPromiseFunction("test", "2").then(
-      function(result) {
-        expect(result).to.be.equal("test-2");
-        done();
+describe('Second Level test', function () {
+  it('Execute', done => {
+    lib.myPromiseFunction('test', '2').then(
+      function (result) {
+        expect(result).to.be.equal('test-2')
+        done()
       },
-      function(error) {
-        done(error);
+      function (error) {
+        done(error)
       }
-    );
-  });
-});
+    )
+  })
+})

@@ -27,6 +27,11 @@ testing:
     port: 5000
     bypassCORS: true
     useHelmet: true
+  
+  eslint:
+    ignore:
+      - ''
+      - ''
 
   log:
     file: './logs/test-logs.log' #Where log file will be saved. Date will be concatenated before the name.
