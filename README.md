@@ -9,9 +9,9 @@ integration too.
 
 > In this guide is assumed you're using Visual Studio Code in Windows
 
-- Installing dependencies
+- Installing dependencies. If a problem related to engines appear, add `--ignore-engines` option
 ```
-yarn
+yarn install
 ```
 > Whenever starting a project, this is the first command you must run
 
@@ -42,7 +42,7 @@ Since Webpack is used in this template project, whenever a change is made, all c
 
 - Making changes: After a backend change, you must restart the server to test it. If change is on frontend, is enough to restart browser (Ctrl + Shift + R).
 
-- Stoping the server: To stop execution you have to push Ctrl + C.
+- Stopping the server: To stop execution you have to push Ctrl + C.
 
 - Run package test suite, based on setup in package.json
 ``` "scripts" : {"test" : "grunt test"} ```
@@ -119,18 +119,18 @@ steps:
   8.5. [YAML and JSON](#yaml-and-json).  
   8.6. [HTTP requests](#http-requests).  
   8.7. [Make a server](#make-a-server).  
-  
+9. [How to make a release and deliver](#9-how-to-make-a-release-and-deliver)
   
 ## 1. Latest release
 
 [![Build Status](https://travis-ci.org/isa-group/project-template-nodejs.svg?branch=master)](https://travis-ci.org/http://github.com/isa-group/project-template-nodejs)
 
-The version 0.0.0 is the latest stable version of project-template-nodejs component.
-see [release note](http://github.com/isa-group/project-template-nodejs/releases/tag/0.0.0) for details.
+The version 1.1.1 is the latest stable version of project-template-nodejs component.
+see [release note](http://github.com/isa-group/project-template-nodejs/releases/tag/1.1.1) for details.
 
 For running:
 
-- Download latest version from [0.0.0](http://github.com/isa-group/project-template-nodejs/releases/tag/0.0.0)
+- Download latest version from [1.1.1](http://github.com/isa-group/project-template-nodejs/releases/tag/1.1.1)
 
 ## 2. Adapt package.json
 
@@ -172,15 +172,14 @@ A `package.json` is generally seemed such as the following.
 You MUST change the following fields:
 
 - **[ MUST ]** `name` = Name of your project. 
-- **[ COULD ]** `description` = A breaf description of your proyect.
+- **[ COULD ]** `description` = A brief description of your project.
 - **[ MUST ]** `homepage` = Web or Github's homepage of your project.
-- **[ SHOULD ]** `keywords` = Key words for idenfiying your project.
+- **[ SHOULD ]** `keywords` = Key words for identifying your project.
 - **[ MUST ]** `author.name`= Your name or your organization name.
 - **[ MUST ]** `author.web` = Author web site.
 - **[ MUST ]** `repository.url` = Location of your repository.
 - **[ MUST ]** `repository.web` = Web view of your repository, Github for example.
 - **[ MUST ]** `docker.url` = If you use docker for delivering and running your app.
-
 
 ## 3. Modify Gruntfile
 
@@ -287,6 +286,7 @@ be deployed, you must configure this task as following:
 release: {
     options: {
         changelog: true, //NOT CHANGE
+        changelogFromGithub: true, //NOT CHANGE
         githubReleaseBody: 'See [CHANGELOG.md](./CHANGELOG.md) for details.', //NOT CHANGE
         npm: false, //CHANGE TO TRUE IF YOUR PROJECT IS A NPM MODULE 
         //npmtag: true, //default: no tag
@@ -306,6 +306,7 @@ If your project is a `npm module` you must configure this task as following:
 release: {
     options: {
         changelog: true, //NOT CHANGE
+        changelogFromGithub: true, //NOT CHANGE
         githubReleaseBody: 'See [CHANGELOG.md](./CHANGELOG.md) for details.', //NOT CHANGE
         npm: true, //CHANGE TO TRUE IF YOUR PROJECT IS A NPM MODULE 
         //npmtag: true, //default: no tag
@@ -363,7 +364,7 @@ dockerize: {
 
 > You **MUST** use this task.
 
-This task generates coverage report of istanbul instrumented code.
+This task generates coverage report of Istanbul instrumented code.
 
 ```js
 mocha_istanbul: {
@@ -382,7 +383,10 @@ mocha_istanbul: {
       },
     }
 ```
-Reports are generated in index.html file (src\backend\coverage\lcov-report\index.html).
+Reports are generated in index.html file (public\coverage\lcov-report\index.html).
+
+You must change `..options.name` to the name of your project and set up these environment
+variables on command line. 
 
 ### 3.2 Custom tasks
 
@@ -555,7 +559,7 @@ When you build your project, WebPack will generate a new JS file (called bundles
 
 
 If you have multiples separated Views that use completely different JS code, you can add multiple entry points and separate code in different bundles.
-You can change this, as well as bundles destination folder, in webpack.config.js.
+You can change this, as well as bundles destination folder, in webpack.index.js.
 
 <img src="https://i.imgur.com/aBd8HX4.png" width="500">
 
@@ -607,7 +611,7 @@ to execute `config.addConfiguration`, it is excecuted by default.
 ### Logging
 
 If it is necessary to use a logger, you must use the logger which is exported 
-on `src/logger/logger.js` as in the example:
+on `src/logger/index.js` as in the example:
 
 ```js
 var logger = require('./logger/logger');
@@ -616,10 +620,10 @@ logger.info('Hello world!');
 ```
 
 In addition, you can configure the logger and use your own levels. You only have to add levels 
-to `src/logger/logger.js`
+to `src/logger/index.js`
 
 ```js
-var customLeves = {
+var customLevels = {
     levels: {
         error: 7,
         warning: 8,
@@ -671,7 +675,7 @@ function _myPromiseFunction(param1, param2) {
         if (param1 && param2) {
             resolve(param1 + "-" + param2);
         } else {
-            reject(new Error("Params are require"));
+            reject(new Error("Params are required"));
         }
     });
 
@@ -737,6 +741,30 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 ```
 
+
+## 9. How to make a release and deliver
+
+### PRECONDITIONS
+  - There is a milestone named "vA.B.C" (being A,B,C digits [0-9])
+  - Every issue should be attached to a certain milestone
+  - Your system has the follwing envirnment variables set:
+    - GITHUB_ACCESS_TOKEN
+    - GITHUB_USERNAME
+    - DOCKER_HUB_EMAIL
+    - DOCKER_HUB_USERNAME
+    - DOCKER_HUB_PASSWORD
+  - You have rename these two strings in he Gruntfile.js
+    - `<my-image-name>` by your DockerHub image (without user)
+    - `<my-github-repo>` by your github repo. Eg. isa-group/project-template-nodejs
+
+### ACTIONS
+  1. Make sure your issues for the milestone vA.B.C are closed and merged with `develop`
+  1. Update package.json with your desired version A.B.C
+  1. Run `grunt build`
+  1. Run `grunt release:A:B:C`
+  1. Optionally, build the Docker image and publish it running `grunt deliver`
+ 
+  
 ## Copyright notice
 
 **project-template-nodejs** is open-source software available under the GNU General Public License (GPL) version 3 (GPL v3).
@@ -746,14 +774,3 @@ All including documentation and code are copyrighted and the copyright is owned 
 For commercial licensing terms, please [contact](./extra/contact.md) for any inquiry.
 
 For technical inquiry please contact to [engineering team](./extra/about.md).
-
-## Latest release
-
-[![Build Status](https://travis-ci.org/isa-group/project-template-nodejs.svg?branch=master)](https://travis-ci.org/http://github.com/isa-group/project-template-nodejs)
-
-The version 0.0.0 is the latest stable version of project-template-nodejs component.
-see [release note](http://github.com/isa-group/project-template-nodejs/releases/tag/0.0.0) for details.
-
-For running:
-
-- Download latest version from [0.0.0](http://github.com/isa-group/project-template-nodejs/releases/tag/0.0.0)
