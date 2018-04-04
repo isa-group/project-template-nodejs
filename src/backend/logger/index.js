@@ -1,6 +1,6 @@
 /*!
-project-template-nodejs 0.0.0, built on: 2017-03-30
-Copyright (C) 2017 ISA group
+project-template-nodejs 1.1.1, built on: 2018-03-27
+Copyright (C) 2018 ISA group
 http://www.isa.us.es/
 https://github.com/isa-group/project-template-nodejs
 
@@ -21,36 +21,36 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 'use strict';
 
 /**
- * Module dependecies.
+ * Module dependencies.
  * */
 
 var winston = require('winston');
-var config = require('../configurations/config');
+var config = require('../configurations');
 
 /**
  * Configure here your custom levels.
  * */
-var customLeves = {
-    levels: {
-        error: 7,
-        warning: 8,
-        custom: 9,
-        info: 12,
-        debug: 13
-    },
-    colors: {
-        error: 'red',
-        warning: 'yellow',
-        custom: 'magenta',
-        info: 'white',
-        debug: 'black'
-    }
+var customLevels = {
+  levels: {
+    error: 7,
+    warning: 8,
+    custom: 9,
+    info: 12,
+    debug: 13
+  },
+  colors: {
+    error: 'red',
+    warning: 'yellow',
+    custom: 'magenta',
+    info: 'white',
+    debug: 'black'
+  }
 };
 
 winston.emitErrs = true;
 var logger = new winston.Logger({
-  levels: customLeves.levels,
-  colors: customLeves.colors,
+  levels: customLevels.levels,
+  colors: customLevels.colors,
   transports: [
     new winston.transports.File({
       createTree: false,

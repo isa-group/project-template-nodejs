@@ -1,6 +1,6 @@
 /*!
-project-template-nodejs 0.0.0, built on: 2017-03-30
-Copyright (C) 2017 ISA group
+project-template-nodejs 1.1.1, built on: 2018-03-27
+Copyright (C) 2018 ISA group
 http://www.isa.us.es/
 https://github.com/isa-group/project-template-nodejs
 
@@ -21,59 +21,101 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 'use strict';
 
 /*
- * Put here your dependecies
+ * Put here your dependencies
  */
-var express = require('express'),
-    helmet = require('helmet'),
-    logger = require('./logger/logger'),
-    moment = require('moment'),
-    Promise = require('bluebird'),
-    config = require('./configurations/config');
+const http = require("http"); // Use https if your app will not be behind a proxy.
+const bodyParser = require("body-parser");
+const express = require("express");
+const cors = require("cors");
+const helmet = require("helmet");
+const compression = require("compression");
+const moment = require("moment");
 
-/*
- * If you are going to use express, please include helmet library 
- * in order to increase security in your webapp
- */
+const config = require("./configurations");
+const logger = require("./logger");
 
-var port = process.env.PORT || config.server.port;
-var app = express();
-app.use(helmet());
-app.use('/', express.static(__dirname + '/../../dist'));
-app.listen(port);
+const app = express();
+
+app.use(compression());
+
+app.use(
+  bodyParser.urlencoded({
+    limit: "50mb",
+    extended: "true"
+  })
+);
+
+app.use(
+  bodyParser.json({
+    limit: "50mb",
+    type: "application/json"
+  })
+);
+
+const frontendPath = __dirname + '/../frontend';
+logger.info("Serving '%s' as static folder", frontendPath);
+app.use(express.static(frontendPath));
+
+if (config.server.bypassCORS) {
+  logger.info("Adding 'Access-Control-Allow-Origin: *' header to every path.");
+  app.use(cors());
+}
+if (config.server.useHelmet) {
+  logger.info("Adding Helmet related headers.");
+  app.use(helmet());
+}
+
+const serverPort = process.env.PORT || config.server.port;
+
+const server = http.createServer(app);
+
+server.listen(serverPort, function () {
+  logger.info("Your server is listening on port %d (http://localhost:%d)", serverPort, serverPort);
+});
 
 
 /*
  * Export functions and Objects
  */
 module.exports = {
-    myfunction: _myfunction,
-    myPromiseFunction: _myPromiseFunction
+  close: _close,
+  myfunction: _myfunction,
+  myPromiseFunction: _myPromiseFunction
 };
 
 
 /*
  * Implement the functions
  */
+
+function _close(callback) {
+  if (server.listening) {
+    server.close(callback);
+  } else {
+    callback();
+  }
+}
+
 function _myfunction(param1, param2) {
 
-    logger.info('Hello world!');
-    logger.info('Param1: %s', param1);
-    logger.info('Param2: %s', param2);
+  logger.info('Hello world!');
+  logger.info('Param1: %s', param1);
+  logger.info('Param2: %s', param2);
 
-    logger.custom('Date: %s', moment().toISOString());
+  logger.custom('Date: %s', moment().toISOString());
 
-    return param1 + "-" + param2;
+  return param1 + "-" + param2;
 
 }
 
 function _myPromiseFunction(param1, param2) {
 
-    return new Promise(function (resolve, reject) {
-        if (param1 && param2) {
-            resolve(param1 + "-" + param2);
-        } else {
-            reject(new Error("Params are required"));
-        }
-    });
+  return new Promise(function (resolve, reject) {
+    if (param1 && param2) {
+      resolve(param1 + "-" + param2);
+    } else {
+      reject(new Error("Params are required"));
+    }
+  });
 
 }

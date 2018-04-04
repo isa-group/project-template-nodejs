@@ -1,6 +1,6 @@
 /*!
-project-template-nodejs 0.0.0, built on: 2017-03-30
-Copyright (C) 2017 ISA group
+project-template-nodejs 1.1.1, built on: 2018-03-27
+Copyright (C) 2018 ISA group
 http://www.isa.us.es/
 https://github.com/isa-group/project-template-nodejs
 
@@ -18,9 +18,24 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
 
-'use strict';
+/**
+ * USED ENV VARS:
+ * 
+ ** GITHUB_ACCESS_TOKEN
+ ** GITHUB_USERNAME
+ ** DOCKER_HUB_EMAIL
+ ** DOCKER_HUB_USERNAME
+ ** DOCKER_HUB_PASSWORD
+ * 
+ * CHANGES TO BE PERFORMED:
+ * 
+ ** REPLACE "<my-image-name>" by your DockerHub image (without user)
+ ** REPLACE "<my-github-repo>" by your github repo. Eg. isa-group/project-template-nodejs
+ * 
+ */
 
-var config = require("./src/backend/configurations/config");
+
+'use strict';
 
 module.exports = function (grunt) {
 
@@ -38,8 +53,6 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks("grunt-mocha-istanbul");
 
-
-
     // Project configuration.
     grunt.initConfig({
         //Load configurations
@@ -51,7 +64,7 @@ module.exports = function (grunt) {
             encoding: 'utf8'
         }).toString(),
 
-        //Add license notice and latest release notes
+        //LICENCE NOTES AND HEADERS
         usebanner: {
             license: {
                 options: {
@@ -60,7 +73,7 @@ module.exports = function (grunt) {
                     replace: true
                 },
                 files: {
-                    src: ['src/**/*.js', 'tests/**/*.js', 'Gruntfile.js'] //If you want to inspect more file, you change this.
+                    src: ['src/**/*.js', 'tests/**/*.js', 'Gruntfile.js'] //If you want to inspect more files, you can change this.
                 }
             },
             readme: {
@@ -76,17 +89,25 @@ module.exports = function (grunt) {
             }
         },
 
-        //Lint JS 
+        //JSLINT 
         jshint: {
-            all: ['Gruntfile.js','src/**/*.js', '!**/frontend/report/**', '!**/frontend/coverage/**','tests/**/*.js', 'index.js'], //If you want to inspect more file, you change this.
+            all: ['Gruntfile.js', 'src/**/*.js', '!**/frontend/report/**', '!**/frontend/coverage/**', '!**/backend/node_modules/**', 'tests/**/*.js', 'index.js'], //If you want to inspect more file, you change this.
             options: {
                 jshintrc: '.jshintrc'
             }
         },
 
-        //Execute mocha tests
+        //AUTORELOAD CODE
+        watch: {
+            scripts: {
+                files: ['src/**/*.js'],
+                tasks: ['jshint']
+            }
+        },
+
+        //MOCHA UNIT TESTING
         mochaTest: {
-            tests: {
+            full: {
                 options: {
                     reporter: 'spec',
                     //captureFile: 'test.results<%= grunt.template.today("yyyy-mm-dd:HH:mm:ss") %>.txt', // Optionally capture the reporter output to a file
@@ -98,72 +119,70 @@ module.exports = function (grunt) {
             }
         },
 
-        //Make a new release on github
-        //"grunt release" for pacth version
-        //"grunt release:minior" for minior version
-        //"grunt release:major" for major version
-        release: {
-            options: {
-                changelog: true, //NOT CHANGE
-                githubReleaseBody: 'See [CHANGELOG.md](./CHANGELOG.md) for details.', //NOT CHANGE
-                npm: false, //CHANGE TO TRUE IF YOUR PROJECT IS A NPM MODULE 
-                //npmtag: true, //default: no tag
-                beforeBump: [], // IS NOT READY YET
-                afterBump: [], // IS NOT READY YET
-                beforeRelease: [], // IS NOT READY YET
-                afterRelease: [], // IS NOT READY YET
-                updateVars: ['pkg'], //NOT CHANGE
-                github: {
-                    repo: "isa-group/project-template-nodejs",
-                    accessTokenVar: "GITHUB_ACCESS_TOKEN", //SET ENVIRONMENT VARIABLE WITH THIS NAME
-                    usernameVar: "GITHUB_USERNAME" //SET ENVIRONMENT VARIABLE WITH THIS NAME
+        //TASK FOR TESTING COVERAGE
+        mocha_istanbul: {
+            full: {
+                src: [
+                    "tests/**/*.test.js",
+
+                ],
+
+                options: {
+                    mask: "*.test.js",
+                    istanbulOptions: ["--harmony", "--handle-sigint"],
+                    coverageFolder: "src/backend/coverage"
                 }
             }
         },
 
-        //IT IS RECOMENDED TO EXECUTE "grunt watch" while you are working.
-        watch: {
-            scripts: {
-                files: ['src/**/*.js'],
-                tasks: ['jshint']
+        //MAKE A RELEASE IN GITHUB
+        /**
+         * Usage:
+         *   grunt release:0.0.1" for patch versions
+         *   grunt release:0.1.0" for minor versions
+         *   grunt release:1.0.0" for major versions
+         * */
+        release: {
+            options: {
+                changelog: true,
+                changelogFromGithub: true,
+                githubReleaseBody: 'See [CHANGELOG.md](./CHANGELOG.md) for details.',
+                npm: false, //CHANGE TO TRUE IF YOUR PROJECT IS A NPM MODULE 
+                //npmtag: true, //default: no tag
+                beforeBump: [],
+                afterBump: [],
+                beforeRelease: [],
+                afterRelease: [],
+                updateVars: ['pkg'],
+                github: {
+                    repo: "isa-group/project-template-nodejs",
+                    accessTokenVar: "GITHUB_ACCESS_TOKEN",
+                    usernameVar: "GITHUB_USERNAME"
+                }
             }
         },
 
-        mocha_istanbul: {
-            full: {
-              src: [
-                "tests/**/*.test.js",
-  
-              ],
-      
-              options: {
-                mask: "*.test.js",
-                istanbulOptions: ["--harmony", "--handle-sigint"],
-                coverageFolder: "src/backend/coverage"
-              }
-            }},
-
-        //USE THIS TASK FOR BUILDING AND PUSHING docker images
+        //BUILDING AND PUSHING DOCKER IMAGES
         dockerize: {
-            'groups-service-latest': {
+            '<my-image-name>-latest': { //CHANGEME: name of the image in dockerhub (without user)
                 options: {
                     auth: {
-                        email: "DOCKER_HUB_EMAIL", //SET ENVIRONMENT VARIABLE WITH THIS NAME
-                        username: "DOCKER_HUB_USERNAME", //SET ENVIRONMENT VARIABLE WITH THIS NAME
-                        password: "DOCKER_HUB_PASSWORD" //SET ENVIRONMENT VARIABLE WITH THIS NAME
+                        email: "DOCKER_HUB_EMAIL",
+                        username: "DOCKER_HUB_USERNAME",
+                        password: "DOCKER_HUB_PASSWORD"
                     },
-                    name: 'groups-service',
+                    name: '<my-image-name>', //CHANGEME: name of the image in dockerhub (without user)
                     push: true
                 }
             },
-            'groups-service-version': {
+            '<my-image-name>-version': { //CHANGEME: name of the image in dockerhub (without user)
                 options: {
                     auth: {
-                        email: "DOCKER_HUB_EMAIL", //SET ENVIRONMENT VARIABLE WITH THIS NAME
-                        username: "DOCKER_HUB_USERNAME", //SET ENVIRONMENT VARIABLE WITH THIS NAME
-                        password: "DOCKER_HUB_PASSWORD" //SET ENVIRONMENT VARIABLE WITH THIS NAME
+                        email: "DOCKER_HUB_EMAIL",
+                        username: "DOCKER_HUB_USERNAME",
+                        password: "DOCKER_HUB_PASSWORD"
                     },
-                    name: 'groups-service',
+                    name: '<my-image-name>', //CHANGEME: name of the image in dockerhub (without user)
                     tag: '<%= pkg.version %>',
                     push: true
                 }
@@ -176,27 +195,31 @@ module.exports = function (grunt) {
         grunt.file.write('package.json', JSON.stringify(grunt.config('pkg'), null, 2));
     });
 
-    grunt.registerTask('import', 'drop and import data', function () {
-        var exec = require('child_process').execSync;
-        var uri = "mongodb://" + config.urlMongo + ":" + config.portMongo + "/" + config.dbName;
-        var fileLocation = "{yourTestFileLocation}";
+    // # DEVELOPER TASKS # 
 
-        var result = exec('mongoimport --uri ' + uri + ' --collection customGroups --drop --file ' + fileLocation, { encoding: 'utf8' });
-        grunt.log.writeln(result);
- });
-
-    // Default task(s).
-    grunt.registerTask('default', ['usebanner']);
-
-
-    //TEST TASK
-    grunt.registerTask('test', ['jshint', 'mochaTest']);
-
-    //BUILD TASK
-    grunt.registerTask('build', ['test', 'buildOn', 'usebanner', 'dockerize']);
+    //DEFAULT TASK
+    grunt.registerTask('default', ['jshint']);
 
     //DEVELOPMENT TASK
-    grunt.registerTask('dev', ['watch']);
+    grunt.registerTask('watch', ['watch']);
+
+    //TEST TASK
+    grunt.registerTask('test', ['jshint', 'mochaTest:full']);
+
+    //TEST AND COVERAGE TASK
+    grunt.registerTask('coverage', ['test', 'mocha_istanbul:full']);
 
 
+
+    // # RELEASE MANAGER TASKS # 
+    //** HOW YO USE THEM: load env vars -next-> grunt build -next-> grunt release:xxx -next-> grunt deliver */
+
+    //BUILD TASK
+    grunt.registerTask('build', ['test','buildOn', 'usebanner']);
+
+    //RELEASE TASK
+    // already defined. Usage: grunt release:0.0.1" for patch versions; grunt release:0.1.0" for minor versions; grunt release:1.0.0" for major versions
+
+    //DELIVER TASK
+    grunt.registerTask('deliver', ['test', 'dockerize']);
 };
