@@ -15,7 +15,7 @@ ENV PORT $PORT
 EXPOSE $PORT
 
 # check every 30s to ensure this service returns HTTP 200
-HEALTHCHECK CMD curl -fs http://localhost:$PORT || exit 1
+#HEALTHCHECK CMD curl -fs http://localhost:$PORT || exit 1
 
 # install dependencies first, in a different location for easier app bind mounting for local development
 WORKDIR /opt
