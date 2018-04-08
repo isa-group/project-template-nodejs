@@ -9,7 +9,8 @@ integration too.
 
 > In this guide is assumed you're using Visual Studio Code in Windows
 
-- Installing dependencies. If a problem related to engines appear, add `--ignore-engines` option
+* Installing dependencies. If a problem related to engines appear, add `--ignore-engines` option
+
 ```
 yarn install
 ```
@@ -82,6 +83,13 @@ Set up debug configuration as following:
 4.  Step over: F10
 5.  Show hover: Ctrl+K / Ctrl+I
 
+yarn lint (--fix)
+
+```
+This command will check your code style and syntax, and display common errors. With --fix param, most of errors will be autofixed, but some other errors need manual revision.
+Install the extension 'Prettier - Code formatter' for autofix errors when saving files.
+```
+
 * Custom commands
 
 It is possible to specify custom script in scripts section on package.json file as is shown below:
@@ -111,26 +119,26 @@ and grunt default task will be executed.
 Before starting to develop your project you must adapt this template by following the next
 steps:
 
-1. Download project-template-nodejs [latest version](#1-latest-release).
-2. [Adapt](#2-adapt-packagejson) the `package.json`.
-3. [Modify](#3-modify-gruntfile) `Grunfile.js` and select the tasks.  
-  3.1. [Defined tasks](#defined-tasks).  
-  3.2. [Custom tasks](#custom-tasks).  
-  3.3. [Select and configure tasks](#select-and-configure-tasks).     
-4. [Clear](#4-clear-changelog) CHANGELOG.md.
-5. [Remove](#5-remove-git-directory) `.git` directory.
-6. [Edit](#6-edit-the-readme) the `README.md`.
-7. [CI](#7-ci-with-travis-ci) with Travis CI.
-8. [Developing](#8-developing-your-project) your project.  
-  8.1. Using [dates](#using-dates).  
-  8.2. Project's [configurations](#projects-configurations-variables) variables.  
-  8.3. [Logging](#logging).  
-  8.4. [Promise](#promise).  
-  8.5. [YAML and JSON](#yaml-and-json).  
-  8.6. [HTTP requests](#http-requests).  
-  8.7. [Make a server](#make-a-server).  
-9. [How to make a release and deliver](#9-how-to-make-a-release-and-deliver)
-  
+1.  Download project-template-nodejs [latest version](#1-latest-release).
+2.  [Adapt](#2-adapt-packagejson) the `package.json`.
+3.  [Modify](#3-modify-gruntfile) `Grunfile.js` and select the tasks.  
+    3.1. [Defined tasks](#defined-tasks).  
+    3.2. [Custom tasks](#custom-tasks).  
+    3.3. [Select and configure tasks](#select-and-configure-tasks).
+4.  [Clear](#4-clear-changelog) CHANGELOG.md.
+5.  [Remove](#5-remove-git-directory) `.git` directory.
+6.  [Edit](#6-edit-the-readme) the `README.md`.
+7.  [CI](#7-ci-with-travis-ci) with Travis CI.
+8.  [Developing](#8-developing-your-project) your project.  
+    8.1. Using [dates](#using-dates).  
+    8.2. Project's [configurations](#projects-configurations-variables) variables.  
+    8.3. [Logging](#logging).  
+    8.4. [Promise](#promise).  
+    8.5. [YAML and JSON](#yaml-and-json).  
+    8.6. [HTTP requests](#http-requests).  
+    8.7. [Make a server](#make-a-server).
+9.  [How to make a release and deliver](#9-how-to-make-a-release-and-deliver)
+
 ## 1. Latest release
 
 [![Build Status](https://travis-ci.org/isa-group/project-template-nodejs.svg?branch=master)](https://travis-ci.org/http://github.com/isa-group/project-template-nodejs)
@@ -140,8 +148,7 @@ see [release note](http://github.com/isa-group/project-template-nodejs/releases/
 
 For running:
 
-- Download latest version from [1.1.1](http://github.com/isa-group/project-template-nodejs/releases/tag/1.1.1)
-
+* Download latest version from [1.1.1](http://github.com/isa-group/project-template-nodejs/releases/tag/1.1.1)
 
 ## 2. Adapt package.json
 
@@ -182,16 +189,15 @@ A `package.json` is generally seemed such as the following.
 
 You MUST change the following fields:
 
-- **[ MUST ]** `name` = Name of your project. 
-- **[ COULD ]** `description` = A brief description of your project.
-- **[ MUST ]** `homepage` = Web or Github's homepage of your project.
-- **[ SHOULD ]** `keywords` = Key words for identifying your project.
-- **[ MUST ]** `author.name`= Your name or your organization name.
-- **[ MUST ]** `author.web` = Author web site.
-- **[ MUST ]** `repository.url` = Location of your repository.
-- **[ MUST ]** `repository.web` = Web view of your repository, Github for example.
-- **[ MUST ]** `docker.url` = If you use docker for delivering and running your app.
-
+* **[ MUST ]** `name` = Name of your project.
+* **[ COULD ]** `description` = A brief description of your project.
+* **[ MUST ]** `homepage` = Web or Github's homepage of your project.
+* **[ SHOULD ]** `keywords` = Key words for identifying your project.
+* **[ MUST ]** `author.name`= Your name or your organization name.
+* **[ MUST ]** `author.web` = Author web site.
+* **[ MUST ]** `repository.url` = Location of your repository.
+* **[ MUST ]** `repository.web` = Web view of your repository, Github for example.
+* **[ MUST ]** `docker.url` = If you use docker for delivering and running your app.
 
 ## 3. Modify Gruntfile
 
@@ -244,25 +250,24 @@ grunt.registerTask("buildOn", function() {
 
 ### 3.1 Defined tasks
 
-#### grunt-contrib-jshint
+#### grunt-eslint
 
 > You **MUST** use this task.
 
-This task checks whether your code follows correctly the javascript syntax. You are not able
-either to change what file are checked or to change `.jshintrc` file.
+This task checks whether your code follows correctly the javascript syntax. You are able to ignore what files will be checked in `.eslintignore` file, or to change options in `.eslintrc` file.
 
 #### grunt-contrib-watch
 
 > You **SHOULD** use this task.
 
-This task executes other tasks while you are developing, the jshint task for example.
+This task executes other tasks while you are developing, the eslint task for example.
 You can choose what task are executed if you change something at `Grunfile.js` as following:
 
 ```js
 watch: {
     scripts: {
         files: ['src/**/*.js'],
-        tasks: ['jshint']
+        tasks: ['eslint']
     }
 }
 ```
@@ -396,10 +401,11 @@ mocha_istanbul: {
       },
     }
 ```
+
 Reports are generated in index.html file (public\coverage\lcov-report\index.html).
 
 You must change `..options.name` to the name of your project and set up these environment
-variables on command line. 
+variables on command line.
 
 ### 4.2 Custom tasks
 
@@ -485,6 +491,7 @@ And you always execute this while you are developing:
 ```
 grunt dev
 ```
+
 ## 5. Clear CHANGELOG
 
 Remove all line on `CHANGELOG.md`.
@@ -557,7 +564,6 @@ script:
   - grunt import
   - npm test
 ```
-
 
 ## 9. Developing your project
 
@@ -642,7 +648,7 @@ to execute `config.addConfiguration`, it is excecuted by default.
 
 ### Logging
 
-If it is necessary to use a logger, you must use the logger which is exported 
+If it is necessary to use a logger, you must use the logger which is exported
 on `src/logger/index.js` as in the example:
 
 ```js
@@ -651,25 +657,25 @@ var logger = require("./logger/logger");
 logger.info("Hello world!");
 ```
 
-In addition, you can configure the logger and use your own levels. You only have to add levels 
+In addition, you can configure the logger and use your own levels. You only have to add levels
 to `src/logger/index.js`
 
 ```js
 var customLevels = {
-    levels: {
-        error: 7,
-        warning: 8,
-        custom: 9,
-        info: 12,
-        debug: 13
-    },
-    colors: {
-        error: 'red',
-        warning: 'yellow',
-        custom: 'magenta',
-        info: 'white',
-        debug: 'black'
-    }
+  levels: {
+    error: 7,
+    warning: 8,
+    custom: 9,
+    info: 12,
+    debug: 13
+  },
+  colors: {
+    error: "red",
+    warning: "yellow",
+    custom: "magenta",
+    info: "white",
+    debug: "black"
+  }
 };
 ```
 
@@ -701,15 +707,13 @@ see an example:
 var Promise = require("bluebird");
 
 function _myPromiseFunction(param1, param2) {
-
-    return new Promise(function (resolve, reject) {
-        if (param1 && param2) {
-            resolve(param1 + "-" + param2);
-        } else {
-            reject(new Error("Params are required"));
-        }
-    });
-
+  return new Promise(function(resolve, reject) {
+    if (param1 && param2) {
+      resolve(param1 + "-" + param2);
+    } else {
+      reject(new Error("Params are required"));
+    }
+  });
 }
 
 _myPromiseFunction.then(successCallback, errorCallback);
@@ -774,31 +778,30 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 ```
 
-
-
 ## 9. How to make a release and deliver
 
 ### PRECONDITIONS
-  - There is a milestone named "vA.B.C" (being A,B,C digits [0-9])
-  - Every issue should be attached to a certain milestone
-  - Your system has the follwing envirnment variables set:
-    - GITHUB_ACCESS_TOKEN
-    - GITHUB_USERNAME
-    - DOCKER_HUB_EMAIL
-    - DOCKER_HUB_USERNAME
-    - DOCKER_HUB_PASSWORD
-  - You have rename these two strings in he Gruntfile.js
-    - `<my-image-name>` by your DockerHub image (without user)
-    - `<my-github-repo>` by your github repo. Eg. isa-group/project-template-nodejs
+
+* There is a milestone named "vA.B.C" (being A,B,C digits [0-9])
+* Every issue should be attached to a certain milestone
+* Your system has the follwing envirnment variables set:
+  * GITHUB_ACCESS_TOKEN
+  * GITHUB_USERNAME
+  * DOCKER_HUB_EMAIL
+  * DOCKER_HUB_USERNAME
+  * DOCKER_HUB_PASSWORD
+* You have rename these two strings in he Gruntfile.js
+  * `<my-image-name>` by your DockerHub image (without user)
+  * `<my-github-repo>` by your github repo. Eg. isa-group/project-template-nodejs
 
 ### ACTIONS
-  1. Make sure your issues for the milestone vA.B.C are closed and merged with `develop`
-  1. Update package.json with your desired version A.B.C
-  1. Run `grunt build`
-  1. Run `grunt release:A:B:C`
-  1. Optionally, build the Docker image and publish it running `grunt deliver`
- 
-  
+
+1.  Make sure your issues for the milestone vA.B.C are closed and merged with `develop`
+1.  Update package.json with your desired version A.B.C
+1.  Run `grunt build`
+1.  Run `grunt release:A:B:C`
+1.  Optionally, build the Docker image and publish it running `grunt deliver`
+
 ## Copyright notice
 
 **project-template-nodejs** is open-source software available under the GNU General Public License (GPL) version 3 (GPL v3).
