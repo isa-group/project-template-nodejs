@@ -660,7 +660,7 @@ logger.info("Hello world!");
 In addition, you can configure the logger and use your own levels. You only have to add levels
 to `src/logger/index.js`, and then require logger and use the custom level that you created, as in the example:
 
-<img src="https://i.imgur.com/5Q1oC4l.gif" width="350">
+<img src="https://i.imgur.com/5Q1oC4l.gif" width="294">
 
 Also, you can change its configuration on `./src/configurations/config.yaml`:
 
