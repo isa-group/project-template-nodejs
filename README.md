@@ -652,40 +652,15 @@ If it is necessary to use a logger, you must use the logger which is exported
 on `src/logger/index.js` as in the example:
 
 ```js
-var logger = require("./logger/logger");
+var logger = require("./src/backend/logger");
 
 logger.info("Hello world!");
 ```
 
 In addition, you can configure the logger and use your own levels. You only have to add levels
-to `src/logger/index.js`
+to `src/logger/index.js`, and then require logger and use the custom level that you created, as in the example:
 
-```js
-var customLevels = {
-  levels: {
-    error: 7,
-    warning: 8,
-    custom: 9,
-    info: 12,
-    debug: 13
-  },
-  colors: {
-    error: "red",
-    warning: "yellow",
-    custom: "magenta",
-    info: "white",
-    debug: "black"
-  }
-};
-```
-
-And then use as in the example:
-
-```js
-var logger = require("./logger/logger");
-
-logger.custom("custom level");
-```
+<img src="https://i.imgur.com/5Q1oC4l.gif">
 
 Also, you can change its configuration on `./src/configurations/config.yaml`:
 

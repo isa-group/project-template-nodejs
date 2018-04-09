@@ -33,15 +33,15 @@ var customLevels = {
   levels: {
     error: 7,
     warning: 8,
-    custom: 9,
-    info: 12,
+    info: 11,
+    test: 12,
     debug: 13
   },
   colors: {
     error: 'red',
     warning: 'yellow',
-    custom: 'magenta',
     info: 'white',
+    test: 'magenta',
     debug: 'black'
   }
 }
