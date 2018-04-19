@@ -1,8 +1,13 @@
 production:
   server: 
     port: 5000
-    bypassCORS: true
-    useHelmet: true
+    timeout: 86400000
+    bodySize: 50mb
+    bypassCORS: false
+    useHelmet: false
+    httpOptionsOK: true
+    servePackageInfo: true
+    listenOnHttps: false
 
   log:
     level: info
@@ -13,8 +18,13 @@ production:
 development:
   server: 
     port: 5000
+    timeout: 86400000
+    bodySize: 50mb
     bypassCORS: true
     useHelmet: true
+    httpOptionsOK: true
+    servePackageInfo: true
+    listenOnHttps: false
     
   log:
     level: debug
@@ -25,15 +35,19 @@ development:
 testing:
   server:
     port: 5000
+    timeout: 86400000
+    bodySize: 50mb
     bypassCORS: true
     useHelmet: true
-  
+    httpOptionsOK: true
+    servePackageInfo: true
+    listenOnHttps: false
   eslint:
     ignore:
       - ''
       - ''
-
   log:
+    level: debug
     file: './logs/test-logs.log' #Where log file will be saved. Date will be concatenated before the name.
     maxSize: 10000000 #(10MB) Maximum file log size, if one file reaches it, a new file is created.
     maxFiles: 30 # Max Files that can be created per day reaching the maxSize.

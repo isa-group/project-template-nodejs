@@ -17,65 +17,88 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-'use strict'
+'use strict';
 
 /*
  * Put here your dependencies
  */
-const path = require('path')
-const http = require('http') // Use https if your app will not be behind a proxy.
-const bodyParser = require('body-parser')
-const express = require('express')
-const cors = require('cors')
-const helmet = require('helmet')
-const compression = require('compression')
-const moment = require('moment')
+const https = require("https"); // Use https if your app will not be behind a proxy.
+const http = require("http"); // Use http if your app will be behind a proxy.
+const bodyParser = require("body-parser");
+const express = require("express");
+const cors = require("cors");
+const helmet = require("helmet");
+const compression = require("compression");
+const moment = require("moment");
+const fs = require('fs');
+const path = require('path');
 
 const config = require('./configurations')
 const logger = require('./logger')
 
 const app = express()
 
-app.use(compression())
+const frontendPath = path.join(__dirname, '../frontend');
+const serverPort = process.env.PORT || config.server.port;
+const CURRENT_API_VERSION = "v1";
+const httpsOptions = {
+  key: fs.readFileSync('certs/privkey.pem'),
+  cert: fs.readFileSync('certs/cert.pem')
+};
 
+app.use(express.static(frontendPath));
+
+// Default server options
+
+app.use(compression());
+
+logger.info("Using '%s' as HTTP body size", config.server.bodySize);
 app.use(
   bodyParser.urlencoded({
-    limit: '50mb',
-    extended: 'true'
+    limit: config.server.bodySize,
+    extended: "true"
   })
 )
 
 app.use(
   bodyParser.json({
-    limit: '50mb',
-    type: 'application/json'
+    limit: config.server.bodySize,
+    type: "application/json"
   })
 )
 
-const frontendPath = path.join(__dirname, '/../frontend')
-logger.info("Serving '%s' as static folder", frontendPath)
-app.use(express.static(frontendPath))
+// Configurable server options
 
 if (config.server.bypassCORS) {
   logger.info("Adding 'Access-Control-Allow-Origin: *' header to every path.")
   app.use(cors())
 }
+
 if (config.server.useHelmet) {
   logger.info('Adding Helmet related headers.')
   app.use(helmet())
 }
 
-const serverPort = process.env.PORT || config.server.port
+if (config.server.httpOptionsOK) {
+  app.options("/*", function (req, res) {
+    logger.info("Bypassing 405 status put by swagger when no request handler is defined");
+    return res.sendStatus(200);
+  });
+}
 
-const server = http.createServer(app)
+if (config.server.servePackageInfo) {
+  app.use('/api/info', function (req, res) {
+    logger.debug("Serving package.json at '%s'", "/api/info");
+    res.json(require('./../../package.json'));
+  });
+}
+
+const server = config.server.listenOnHttps ? https.createServer(httpsOptions, app) : http.createServer(app);
 
 server.listen(serverPort, function () {
-  logger.info(
-    'Your server is listening on port %d (http://localhost:%d)',
-    serverPort,
-    serverPort
-  )
-})
+  logger.info("Your server is listening on port %d (localhost:%d)", serverPort, serverPort);
+});
+
 
 /*
  * Export functions and Objects
@@ -90,7 +113,7 @@ module.exports = {
  * Implement the functions
  */
 
-function _close (callback) {
+function _close(callback) {
   if (server.listening) {
     server.close(callback)
   } else {
@@ -98,7 +121,7 @@ function _close (callback) {
   }
 }
 
-function _myfunction (param1, param2) {
+function _myfunction(param1, param2) {
   logger.info('Hello world!')
   logger.info('Param1: %s', param1)
   logger.info('Param2: %s', param2)
@@ -108,7 +131,7 @@ function _myfunction (param1, param2) {
   return param1 + '-' + param2
 }
 
-function _myPromiseFunction (param1, param2) {
+function _myPromiseFunction(param1, param2) {
   return new Promise(function (resolve, reject) {
     if (param1 && param2) {
       resolve(param1 + '-' + param2)
