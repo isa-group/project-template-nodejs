@@ -2,7 +2,6 @@
 *Dockerfile*
 *docker-compose*
 node_modules
-logs
 *.log
 *.ps1
 *.cmd

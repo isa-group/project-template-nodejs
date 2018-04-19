@@ -11,7 +11,7 @@ production:
 
   log:
     level: info
-    file: './logs/pro-logs.log' #Where log file will be saved. Date will be concatenated before the name.
+    file: './logs/prod-logs.log' #Where log file will be saved. Date will be concatenated before the name.
     maxSize: 10000000 #(10MB) Maximum file log size, if one file reaches it, a new file is created.
     maxFiles: 30 # Max Files that can be created per day reaching the maxSize.
 
