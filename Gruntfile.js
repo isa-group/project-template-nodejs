@@ -33,22 +33,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
  *
  */
 
-'use strict'
+'use strict';
 
 module.exports = function (grunt) {
-  grunt.loadNpmTasks('grunt-contrib-watch')
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.loadNpmTasks('grunt-mocha-test')
+  grunt.loadNpmTasks('grunt-mocha-test');
 
-  grunt.loadNpmTasks('grunt-release-github')
+  grunt.loadNpmTasks('grunt-release-github');
 
-  grunt.loadNpmTasks('grunt-banner')
+  grunt.loadNpmTasks('grunt-banner');
 
-  grunt.loadNpmTasks('grunt-dockerize')
+  grunt.loadNpmTasks('grunt-dockerize');
 
-  grunt.loadNpmTasks('grunt-mocha-istanbul')
+  grunt.loadNpmTasks('grunt-mocha-istanbul');
 
-  grunt.loadNpmTasks('grunt-eslint')
+  grunt.loadNpmTasks('grunt-eslint');
 
   // Project configuration.
   grunt.initConfig({
@@ -188,41 +188,41 @@ module.exports = function (grunt) {
         }
       }
     }
-  })
+  });
 
   grunt.registerTask('buildOn', function () {
-    grunt.config('pkg.buildOn', grunt.template.today('yyyy-mm-dd'))
+    grunt.config('pkg.buildOn', grunt.template.today('yyyy-mm-dd'));
     grunt.file.write(
       'package.json',
       JSON.stringify(grunt.config('pkg'), null, 2)
-    )
-  })
+    );
+  });
 
   // # DEVELOPER TASKS #
 
   // DEFAULT TASK
   // grunt.registerTask('default', ['jshint'])
 
-  grunt.registerTask('default', ['eslint'])
+  grunt.registerTask('default', ['eslint']);
 
   // DEVELOPMENT TASK
-  grunt.registerTask('watch', ['watch'])
+  grunt.registerTask('watch', ['watch']);
 
   // TEST TASK
-  grunt.registerTask('test', ['eslint', 'mochaTest:full'])
+  grunt.registerTask('test', ['eslint', 'mochaTest:full']);
 
   // TEST AND COVERAGE TASK
-  grunt.registerTask('coverage', ['test', 'mocha_istanbul:full'])
+  grunt.registerTask('coverage', ['test', 'mocha_istanbul:full']);
 
   // # RELEASE MANAGER TASKS #
   //* * HOW YO USE THEM: load env vars -next-> grunt build -next-> grunt release:xxx -next-> grunt deliver */
 
   // BUILD TASK
-  grunt.registerTask('build', ['test', 'buildOn', 'usebanner'])
+  grunt.registerTask('build', ['test', 'buildOn', 'usebanner']);
 
   // RELEASE TASK
   // already defined. Usage: grunt release:0.0.1" for patch versions; grunt release:0.1.0" for minor versions; grunt release:1.0.0" for major versions
 
   // DELIVER TASK
-  grunt.registerTask('deliver', ['test', 'dockerize'])
-}
+  grunt.registerTask('deliver', ['test', 'dockerize']);
+};
