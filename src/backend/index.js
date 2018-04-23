@@ -71,12 +71,12 @@ app.use(
 
 if (config.server.bypassCORS) {
   logger.info("Adding 'Access-Control-Allow-Origin: *' header to every path.")
-  app.use(cors())
+  app.use(cors());
 }
 
 if (config.server.useHelmet) {
   logger.info('Adding Helmet related headers.')
-  app.use(helmet())
+  app.use(helmet());
 }
 
 if (config.server.httpOptionsOK) {

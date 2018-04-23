@@ -72,6 +72,6 @@
         "github": "http://github.com/isa-group/project-template-nodejs"
     },
     "docker": {
-        "url": "https://hub.docker.com/r/isa-group/project-template-nodejs"
+        "url": "https://hub.docker.com/r/isagroup/project-template-nodejs"
     }
 }
