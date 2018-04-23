@@ -33,10 +33,10 @@ const moment = require("moment");
 const fs = require('fs');
 const path = require('path');
 
-const config = require('./configurations')
-const logger = require('./logger')
+const config = require('./configurations');
+const logger = require('./logger');
 
-const app = express()
+const app = express();
 
 const frontendPath = path.join(__dirname, '../frontend');
 const serverPort = process.env.PORT || config.server.port;
@@ -58,24 +58,24 @@ app.use(
     limit: config.server.bodySize,
     extended: "true"
   })
-)
+);
 
 app.use(
   bodyParser.json({
     limit: config.server.bodySize,
     type: "application/json"
   })
-)
+);
 
 // Configurable server options
 
 if (config.server.bypassCORS) {
-  logger.info("Adding 'Access-Control-Allow-Origin: *' header to every path.")
+  logger.info("Adding 'Access-Control-Allow-Origin: *' header to every path.");
   app.use(cors());
 }
 
 if (config.server.useHelmet) {
-  logger.info('Adding Helmet related headers.')
+  logger.info('Adding Helmet related headers.');
   app.use(helmet());
 }
 
@@ -107,7 +107,7 @@ module.exports = {
   close: _close,
   myfunction: _myfunction,
   myPromiseFunction: _myPromiseFunction
-}
+};
 
 /*
  * Implement the functions
@@ -115,28 +115,28 @@ module.exports = {
 
 function _close(callback) {
   if (server.listening) {
-    server.close(callback)
+    server.close(callback);
   } else {
-    callback()
+    callback();
   }
 }
 
 function _myfunction(param1, param2) {
-  logger.info('Hello world!')
-  logger.info('Param1: %s', param1)
-  logger.info('Param2: %s', param2)
+  logger.info('Hello world!');
+  logger.info('Param1: %s', param1);
+  logger.info('Param2: %s', param2);
 
-  logger.custom('Date: %s', moment().toISOString())
+  logger.custom('Date: %s', moment().toISOString());
 
-  return param1 + '-' + param2
+  return param1 + '-' + param2;
 }
 
 function _myPromiseFunction(param1, param2) {
   return new Promise(function (resolve, reject) {
     if (param1 && param2) {
-      resolve(param1 + '-' + param2)
+      resolve(param1 + '-' + param2);
     } else {
-      reject(new Error('Params are required'))
+      reject(new Error('Params are required'));
     }
-  })
+  });
 }

@@ -17,19 +17,19 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-'use strict'
+'use strict';
 
 /**
  * Module dependencies.
  * */
 
-var winston = require('winston')
-var config = require('../configurations')
+const winston = require('winston');
+const config = require('../configurations');
 
 /**
  * Configure here your custom levels.
  * */
-var customLevels = {
+const customLevels = {
   levels: {
     error: 7,
     warning: 8,
@@ -44,10 +44,10 @@ var customLevels = {
     test: 'magenta',
     debug: 'black'
   }
-}
+};
 
-winston.emitErrs = true
-var logger = new winston.Logger({
+winston.emitErrs = true;
+const logger = new winston.Logger({
   levels: customLevels.levels,
   colors: customLevels.colors,
   transports: [
@@ -70,9 +70,9 @@ var logger = new winston.Logger({
     })
   ],
   exitOnError: false
-})
+});
 
 /*
  * Export functions and Objects
  */
-module.exports = logger
+module.exports = logger;
