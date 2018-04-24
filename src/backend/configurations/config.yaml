@@ -1,6 +1,6 @@
 production:
   server: 
-    port: 5000
+    port: 80
     timeout: 86400000
     bodySize: 50mb
     bypassCORS: false
