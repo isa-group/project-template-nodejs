@@ -5,6 +5,9 @@ tasks automation with [Grunt](http://gruntjs.com/). Also, this project contains 
 to use for managing: date, logging, configuration, requests, yaml, json and promise. Finally, it has [Travis CI](https://travis-ci.org/)
 integration too.
 
+First of all you must start installing yarn globally in your computer.
+npm install yarn -G
+
 ## Basic usage
 
 > In this guide is assumed you're using Visual Studio Code in Windows
@@ -113,6 +116,19 @@ yarn run customScript
 and grunt default task will be executed.
 
 > To see more about grunt tasks and Gruntfile.js go to [modify Gruntfile section](#4-modify-gruntfile)
+
+## Adapting a Swagger project to Project template
+
+If you create your project and imported with Swagger, you must follow this step to achieve a fast and good adaptation:
+
+1.  Clone template repository in your desired location for project.
+2.  Copy name, version and description from your project 'package.json' to project template cloned.
+3.  Change the necessary configs (ports, etc.)
+4.  Move the folders ['api', 'service', 'controllers', 'utils'] to: '/src/backend/'.
+5.  Merge file from '/src/backend/index.js' with your 'index.js' file.
+    * If you dont want a frontend in your project, remove the lines that binds web to frontend folder
+6.  Add swagger modules dependencies with yarn (connect, etc...)
+7.  Check check the correct functioning of the project.
 
 ## How to adapt the template
 
