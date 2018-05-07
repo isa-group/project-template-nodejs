@@ -2,6 +2,9 @@ FROM node:9-alpine
 
 LABEL maintainer="ISA Research Group <isagroup.us@gmail.com>"
 
+# If needed, use this commnad (only install the ones you need) for building purposes
+#RUN apk add --no-cache git python python-dev py-pip build-base libc6-compat && pip install virtualenv
+
 RUN mkdir -p /opt/app
 
 # set our node environment, either development or production
