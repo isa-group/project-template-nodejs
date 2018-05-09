@@ -126,8 +126,11 @@ If you create your project and imported with Swagger, you must follow this step 
 3.  Change the necessary configs (ports, etc.)
 4.  Move the folders ['api', 'service', 'controllers', 'utils'] to: '/src/backend/'.
 5.  Merge file from '/src/backend/index.js' with your 'index.js' file.
+For this, you must copy lines from "var=swaggerTools = require('swagger-tools');" from your generated swagger index.js file to the end of index.js file of template, and remove port line (because this is already set in configuration)
     * If you dont want a frontend in your project, remove the lines that binds web to frontend folder
-6.  Add swagger modules dependencies with yarn (connect, etc...)
+    * Remove promise functions examples in this index file, and the call to this function in first parent folder index.js file.
+    
+6.  Add swagger modules dependencies with yarn (swaggers-tools)
 7.  Check check the correct functioning of the project.
 
 ## How to adapt the template
