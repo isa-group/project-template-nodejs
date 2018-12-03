@@ -1,3 +1,5 @@
+[![Known Vulnerabilities](https://snyk.io/test/github/isa-group/project-template-nodejs/badge.svg)](https://snyk.io/test/github/isa-group/project-template-nodejs)
+
 # Project Template Node JS
 
 This repository contains a template for a [Node JS](https://nodejs.org/en/) project with some development policy and 
