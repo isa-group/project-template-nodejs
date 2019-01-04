@@ -15,9 +15,9 @@
     "js-yaml": "^3.8.1",
     "moment": "^2.17.1",
     "newman": "^4.2.2",
-    "request": "^2.79.0",
+    "request": "^2.85.0",
     "winston": "^2.4.0",
-    "snyk": "^1.116.2"
+    "snyk": "^1.120.1"
   },
   "devDependencies": {
     "bower": "^1.8.0",
