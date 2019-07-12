@@ -29,7 +29,7 @@
     "grunt-banner": "^0.6.0",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-jshint": "^1.1.0",
-    "grunt-contrib-watch": "^1.1.0",
+    "grunt-contrib-watch": "^1.0.1",
     "grunt-dockerize": "0.0.2",
     "grunt-header": "^1.1.0",
     "grunt-mocha-istanbul": "^5.0.2",
