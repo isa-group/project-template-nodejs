@@ -17,14 +17,14 @@
     "newman": "^4.2.2",
     "request": "^2.79.0",
     "winston": "^2.4.0",
-    "snyk": "^1.116.2"
+    "snyk": "^1.259.0"
   },
   "devDependencies": {
     "bower": "^1.8.0",
     "chai": "^4.1.2",
     "clean-webpack-plugin": "^0.1.18",
     "concurrently": "^3.5.1",
-    "copy-webpack-plugin": "^4.4.2",
+    "copy-webpack-plugin": "^5.0.5",
     "grunt": "^1.0.3",
     "grunt-banner": "^0.6.0",
     "grunt-cli": "^1.2.0",
